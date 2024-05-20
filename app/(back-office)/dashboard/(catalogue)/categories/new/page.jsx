@@ -7,11 +7,14 @@ import { useForm } from 'react-hook-form';
 import TextareaInput from '@/components/FormInputs/FormInputs/TexAreaInput';
 import { generateSlug } from '@/lib/generateSlug';
 import ImageInput from '@/components/FormInputs/FormInputs/ImageInput';
+import { makePostRequest } from '@/lib/apiRequest';
 
 export default function New() {
   const [imageUrl,setImageUrl] =useState("")
+  const [loading,setLoading] =useState(false);
   const {
     register,
+    reset,
     handleSubmit,
     formState:{ errors },
   } = useForm();
@@ -24,16 +27,20 @@ export default function New() {
       -image
       -description
       */}
+   //setLoading(true)
     const slug=generateSlug(data.title);
-    data.slug=slug
-    data.imageUrl=imageUrl
- console.log(data);
-  }
+      data.slug=slug
+      data.imageUrl=imageUrl;
+      console.log(data);
+      makePostRequest(setLoading, "api/categories", data, "Category", reset);
+      setImageUrl("");
+  
+    }   
   return (
    <div>
       <FormHeader title="New Category"/>
 
-      <form id="" onSubmit={handleSubmit(onSubmit)} className='w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg
+      <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg
        shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3'>
         <div className='grid gap-4 sm:grid-cols-2 sm:gap-6'>
           <TextInput 
@@ -54,7 +61,7 @@ export default function New() {
           endpoint='categoryImageUploader' 
           label="Category Image" />
           </div>
-        <SubmitButton isLoading={false} buttonTitle="Create Category" loadingButtonTitle="Creating Category please wait..." />
+        <SubmitButton isLoading={loading} buttonTitle="Create Category" loadingButtonTitle="Creating Category please wait..." />
       </form> 
     
     </div>
