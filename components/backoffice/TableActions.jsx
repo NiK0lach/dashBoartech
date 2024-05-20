@@ -4,10 +4,10 @@ import React from 'react'
 export default function TableActions() {
   return (
    
-      <div className="flex justify-between py-6 px-12 bg-slate-700 rounded-lg items-center gap-8 ">
+      <div className="flex justify-between py-6 px-12 bg-white dark:bg-slate-700 rounded-lg items-center gap-8 ">
        <button className='relative inline-flex items-center justify-center
         py-3 px-4  text-base space-x-3 font-medium text-gray-900 border border-lime-500 
-         rounded-lg group bg-slate-800  group-hover: hover:text-white
+         rounded-lg group bg-slate-100 dark:bg-slate-800  group-hover: hover:text-slate-600
            dark:text-white focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800'>
             <Download/><span>Export</span></button>  
        {/* Search */}

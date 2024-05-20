@@ -2,17 +2,20 @@
 import SubmitButton from '@/components/FormInputs/FormInputs/SubmitButton';
 import TextInput from '@/components/FormInputs/FormInputs/TextInput';
 import FormHeader from '@/components/backoffice/FormHeader';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import TextareaInput from '@/components/FormInputs/FormInputs/TexAreaInput';
 import { generateSlug } from '@/lib/generateSlug';
+import ImageInput from '@/components/FormInputs/FormInputs/ImageInput';
 
 export default function New() {
+  const [imageUrl,setImageUrl] =useState("")
   const {
     register,
     handleSubmit,
     formState:{ errors },
   } = useForm();
+
   async function onSubmit(data){
       {/* 
       -id=>auto
@@ -21,14 +24,16 @@ export default function New() {
       -image
       -description
       */}
-    const slug=generateSlug(data.title)
+    const slug=generateSlug(data.title);
     data.slug=slug
- //console.log(data);
+    data.imageUrl=imageUrl
+ console.log(data);
   }
   return (
    <div>
       <FormHeader title="New Category"/>
-      <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg
+
+      <form id="" onSubmit={handleSubmit(onSubmit)} className='w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg
        shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3'>
         <div className='grid gap-4 sm:grid-cols-2 sm:gap-6'>
           <TextInput 
@@ -43,9 +48,14 @@ export default function New() {
             register={register}
             errors={errors}
           />
+          <ImageInput 
+          imageUrl={imageUrl} 
+          setImageUrl={setImageUrl} 
+          endpoint='categoryImageUploader' 
+          label="Category Image" />
           </div>
         <SubmitButton isLoading={false} buttonTitle="Create Category" loadingButtonTitle="Creating Category please wait..." />
-      </form>
+      </form> 
     
     </div>
     

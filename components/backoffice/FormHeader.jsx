@@ -7,12 +7,9 @@ export default function FormHeader({title}) {
   return (
     <div className="flex items-center justify-between py-6 px-12 bg-white text-slate-700 dark:bg-slate-600  dark:text-slate-50 rounded-lg shadow mb-12">
       <h2 className='text-xl font-bold'>{title}</h2>
-      <button onClick={()=>router.back()} className=''>
-        <X/>
-
-      </button>
+      <button onClick={()=>router.back()} className=''> <X/> </button>
       </div>
   )
-}
+};
 
 

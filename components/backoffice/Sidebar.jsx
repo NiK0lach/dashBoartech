@@ -107,11 +107,11 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
         <Collapsible className='px-6 py-2'>
         <CollapsibleTrigger className='' onClick={() => setOpenMenu(!openMenu)}>
             <button className='flex items-center space-x-6 py-2'>
-            <div className="flex items-center space-x-3">
-            <Slack/>
-            <span> Catalogue</span>
-            </div>
-           {openMenu? <ChevronDown/>: <ChevronRight/>}
+              <div className="flex items-center space-x-3">
+                <Slack/>
+                <span> Catalogue</span>
+              </div>
+            {openMenu? <ChevronDown/>: <ChevronRight/>}
             </button>
           </CollapsibleTrigger>
           <CollapsibleContent className='rounded-lg py-3 px-3 pl-6 bg-slate-50 dark:bg-slate-800'>

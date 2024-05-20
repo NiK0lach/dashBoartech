@@ -84,7 +84,7 @@ export default function Navbar({ setShowSidebar,showSidebar }) {
                 <DropdownMenu>
                 <DropdownMenuTrigger>
                 <button>
-                 <Image src='/Snake2.webp' width={200} height={200} className="w-8 h-8 rounded-full"/>
+                 <Image src='/Snake2.webp' width={200} height={200} alt='Profile user' className="w-8 h-8 rounded-full"/>
                </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="py-2 px-4 pr-8">
