@@ -1,11 +1,18 @@
 import React from 'react'
 
-function products() {
+export default function banners() {
   return (
     <div>
       <h2>Banners</h2>
+      {/* 
+       image
+       description
+       url
+
+      
+      */}
     </div>
   )
 }
 
-export default products
+
