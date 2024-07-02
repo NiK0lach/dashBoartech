@@ -69,9 +69,9 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
         href:"/dashboard/categories"
       },
       {
-        title:"Atributes",
+        title:"Banners",
         icon:GitCommitHorizontal,
-        href:"/dashboard/atributes"
+        href:"/dashboard/banners"
       },
       {
         title:"coupons",

@@ -82,6 +82,7 @@ export default function New() {
             name="description"
             register={register}
             errors={errors}
+            className='w-full'
           />
 
 
