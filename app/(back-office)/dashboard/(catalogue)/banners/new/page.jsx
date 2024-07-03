@@ -4,11 +4,10 @@ import TextInput from '@/components/FormInputs/FormInputs/TextInput';
 import FormHeader from '@/components/backoffice/FormHeader';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import TextareaInput from '@/components/FormInputs/FormInputs/TexAreaInput';
 import { generateSlug } from '@/lib/generateSlug';
 import ImageInput from '@/components/FormInputs/FormInputs/ImageInput';
 import { makePostRequest } from '@/lib/apiRequest';
-import SelectInput from '@/components/FormInputs/FormInputs/SelectInput';
+import ToggleInput from '@/components/FormInputs/FormInputs/ToggleInput';
 
 export default function NewBanner() {
   const [imageUrl,setImageUrl] =useState("");
@@ -16,9 +15,16 @@ export default function NewBanner() {
   const {
     register,
     reset,
+    watch,
     handleSubmit,
     formState:{ errors },
-  } = useForm();
+  } = useForm({
+      defaultValues: {
+        isActive:true,
+    },
+  });
+  const isActive = watch("isActive");
+  console.log(isActive);
 
   async function onSubmit(data){
       {/* 
@@ -57,12 +63,21 @@ export default function NewBanner() {
           type='url'
           errors={errors}
           />
-       
+       {/* COnfigure thi endpoint in the core s. */}
          <ImageInput 
           imageUrl={imageUrl} 
           setImageUrl={setImageUrl} 
           endpoint='bannerImageUploader' 
           label="Banner Image" />
+          
+           {/* Toggle component */}
+          <ToggleInput
+            label="Publica Banner"
+            name="isActive"
+            trueTitle="Active"
+            falseTitle="Draft"
+            register={register}
+            />
           </div>
         <SubmitButton isLoading={loading} buttonTitle="Create Banner" loadingButtonTitle="Creating Banner please wait..." />
       </form> 

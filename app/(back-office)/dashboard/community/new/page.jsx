@@ -10,25 +10,28 @@ import ImageInput from '@/components/FormInputs/FormInputs/ImageInput';
 import { makePostRequest } from '@/lib/apiRequest';
 import SelectInput from '@/components/FormInputs/FormInputs/SelectInput';
 import ToggleInput from '@/components/FormInputs/FormInputs/ToggleInput';
+import QuillEditor from '@/components/FormInputs/FormInputs/QuillEditor';
+
+
 
 export default function New() {
   const [imageUrl,setImageUrl] =useState("");
-  const marcas =[
+  const categories =[
     {
       id:1,
-      title:"Patinetas Electricas marca #1"
+      title:"Categories #1"
     },
     {
       id:2,
-      title:"Scooters Electricas marca #1"
+      title:"Categories #2"
     },
     {
       id:3,
-      title:"Biciletas Electricas marca #1"
+      title:"Categories #3"
     },
     {
       id:4,
-      title:"Motos Electricas marca #1"
+      title:"Categories #4"
     },
   ]
   const [loading,setLoading] =useState(false);
@@ -40,69 +43,82 @@ export default function New() {
     formState:{ errors },
   } = useForm({
       defaultValues: {
-        isActive:true,
+        isActive:false,
     },
   });
+
+ //Quill editor setUp
+  const [content, setContent] = useState("");
   const isActive = watch("isActive");
   console.log(isActive);
 
   async function onSubmit(data){
       {/* 
-      -id=>auto
+      -id=>auto()
       -title
-      -slug=>auto
-      -image
+      -expertId
+      -categoryId
+      -slug=>auto()
       -description
+      -content=>rich text
+      -image
       */}
    //setLoading(true)
     const slug=generateSlug(data.title);
       data.slug=slug;
       data.imageUrl=imageUrl;
+      data.content=content;
       console.log(data);
-      makePostRequest(setLoading, "api/categories", data, "Category", reset);
+      makePostRequest(setLoading, "api/training", data, "Training", reset);
       setImageUrl("");
   
     }   
   return (
    <div>
-      <FormHeader title="New Category"/>
+      <FormHeader title="New Training"/>
 
       <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg
        shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3'>
         <div className='grid gap-4 sm:grid-cols-2 sm:gap-6'>
           <TextInput 
-          label="Category title"
+          label="Training title"
           name="title"
           register={register}
           errors={errors}
           className='w-full'
           />
           <SelectInput 
-           label="Select Marca"
-           name="marcaIds"
+           label="Select Category"
+           name="categoryId"
            register={register}
            errors={errors}
-           options={marcas}
-           multiple={true}
+           options={categories}
            className='w-full'
+           multiple={false}
           />
         <TextAreaInput 
-            label="Category Description"
+            label="Training Description"
             name="description"
             register={register}
             errors={errors}
-            className='w-full'
+           />
+             {/* QuillEditor component */}
+           <QuillEditor 
+           label="Training Content"
+           value={content}
+           onChange={setContent}
           />
-
-         <ImageInput 
+         
+          <ImageInput 
           imageUrl={imageUrl} 
           setImageUrl={setImageUrl} 
-          endpoint='categoryImageUploader' 
-          label="Category Image" />
-
-          {/* Toggle component */}
+          endpoint='trainingImageUploader' 
+          label="Training Thumbnail"
+          
+          />
+         {/* Toggle component */}
           <ToggleInput
-            label="Publica Categoria"
+            label="Publica Training"
             name="isActive"
             trueTitle="Active"
             falseTitle="Draft"
@@ -110,7 +126,7 @@ export default function New() {
             />
 
           </div>
-        <SubmitButton isLoading={loading} buttonTitle="Create Category" loadingButtonTitle="Creating Category please wait..." />
+        <SubmitButton isLoading={loading} buttonTitle="Create Training" loadingButtonTitle="Creating Training please wait..." />
       </form> 
     
     </div>

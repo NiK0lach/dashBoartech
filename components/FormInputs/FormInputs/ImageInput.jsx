@@ -16,7 +16,7 @@ export default function ImageInput({
       <div className="flex justify-between items-center mb-4">
         <label
           htmlFor="course-image"
-          className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-50 mb-2"
+          className="block text-sm font-medium leading-6  text-gray-900 dark:text-slate-50 mb-2"
         >
           {label}
         </label>
@@ -41,6 +41,7 @@ export default function ImageInput({
         />
       ) : (
         <UploadDropzone
+        className="border border-solid rounded-lg border-slate-200 dark:border-slate-600"
           endpoint={endpoint}
           onClientUploadComplete={(res) => {
             setImageUrl(res[0].url);

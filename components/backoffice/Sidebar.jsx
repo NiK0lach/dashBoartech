@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '../../public/assets/images/logo/img_logogernik-00_03.png';
-import { BoxIcon, ChevronDown, ChevronRight, CircleDollarSign, GitCommitHorizontal, LayoutGrid, LogOut, Settings, Slack, Store, Truck, User2, UserSquare, Warehouse} from 'lucide-react';
+import { BoxIcon, ChevronDown, ChevronRight, CircleDollarSign, GitCommitHorizontal, LayoutGrid, LogOut, PanelsTopLeft, Settings, Slack, Store, Truck, User2, UserSquare, Warehouse} from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import {
   Collapsible,
@@ -29,6 +29,11 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
         title:"Suppliers",
         icon:BoxIcon,
         href:"/dashboard/suppliers"
+      },
+      {
+        title:"Comunity",
+        icon:PanelsTopLeft,
+        href:"/dashboard/community"
       },
       {
         title:"Orders",
@@ -74,20 +79,12 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
         href:"/dashboard/banners"
       },
       {
-        title:"coupons",
+        title:"Coupons",
         icon:GitCommitHorizontal,
         href:"/dashboard/coupons"
       },
-      {
-        title:"Staff",
-        icon:GitCommitHorizontal,
-        href:"/dashboard/staff"
-      },
-      {
-        title:"Banners",
-        icon:GitCommitHorizontal,
-        href:"/dashboard/banners"
-      },
+      
+     
     
     ];
  const [openMenu,setOpenMenu]=useState(false);

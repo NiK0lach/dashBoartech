@@ -6,21 +6,16 @@ import { useForm } from 'react-hook-form';
 import TextInput from '@/components/FormInputs/FormInputs/TextInput';
 import TextAreaInput from '@/components/FormInputs/FormInputs/TextAreaInput';
 import SelectInput from '@/components/FormInputs/FormInputs/SelectInput';
-import ImageInput from '@/components/FormInputs/FormInputs/ImageInput';
-import { makePostRequest } from '@/lib/apiRequest';
-import { generateSlug } from '@/lib/generateSlug';
 import ToggleInput from '@/components/FormInputs/FormInputs/ToggleInput';
-
-
-
+import { makePostRequest } from '@/lib/apiRequest';
+import { generateUserCode } from '@/lib/generateUserCode';
 
 export default function New() {
-  const [logoUrl,setLogoUrl] =useState("");
-  const [loading,setLoading] =useState(false);
-  const {
-    register,
-    reset,
-    watch,
+   const [loading,setLoading] =useState(false);
+   const {
+      register,
+      reset,
+      watch,
       handleSubmit,
     formState:{ errors },
   } = useForm({
@@ -32,116 +27,93 @@ export default function New() {
   console.log(isActive);
 
 
-
   async function onSubmit(data){
-      {/* 
-      -id=>auto
-      -title
-      -code=>auto
-      -expiry date
-      */}
-   const slug=generateSlug(data.storeTitle);
-   data.slug=slug;
-   data.logoUrl = logoUrl;
-   console.log(data);
-   makePostRequest(setLoading, "api/stores", data, "Stores", reset)
-   setLogoUrl("");
-          
-  
-    }   
+     const supplierCode = generateUserCode('IRSN', data.name);
+     data.supplierCode = supplierCode;
+     makePostRequest(setLoading, "api/suppliers", data, "Suppliers", reset)
+       console.log(data);
+ }
   return (
    <div>
-      <FormHeader title="New Store"/>
+      <FormHeader title="New Supplier"/>
 
       <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg
        shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3'>
         <div className='grid gap-4 sm:grid-cols-2 sm:gap-6'>
           <TextInput 
-          label="Store Title"
-          name="storeTitle"
+          label="Supplier full Name"
+          name="name"
+          register={register}
+          errors={errors}
+          className='w-full'
+          />
+          
+           <TextInput 
+          label="Supplier Phone"
+          name="phone"
+          type='tel'
           register={register}
           errors={errors}
           className='w-full'
           />
            <TextInput 
-          label="Store Phone Number"
-          name="storePhone"
-          register={register}
-          errors={errors}
-          className='w-full'
-          type='tel'
-          />
-          <TextInput 
-          label="Store Email"
-          name="storeEmail"
-          register={register}
-          errors={errors}
-          className='w-full'
+          label="Supplier email"
+          name="email"
           type='email'
-          />
-          <TextInput 
-          label="Store Adress"
-          name="storeAdress"
-          register={register}
-          errors={errors}
-          className='w-full'
-          />
-         <TextInput 
-          label="Contact Person"
-          name="contactName"
           register={register}
           errors={errors}
           className='w-full'
           />
           <TextInput 
-          label="contact Phone Number"
-          name="contactPhone"
+          label="Supplier Adress"
+          name="adress"
           register={register}
           errors={errors}
           className='w-full'
+          />
+          <TextInput 
+          label="Supplier Contact Name"
+          name="contact"
+          register={register}
+          errors={errors}
+          className='w-full'
+          />
+          <TextInput 
+          label="Contact Phone"
+          name="contactphone"
           type='tel'
+          register={register}
+          errors={errors}
+          className='w-full'
           />
-          <TextAreaInput 
-          label="Contact Payment Terms"
-          name="terms"
+           
+          <TextAreaInput
+          label="Suppliers Payment Terms"
+          name="paymenterms"
           register={register}
           errors={errors}
           />
-            <TextAreaInput 
+          <TextAreaInput
           label="Notes"
           name="notes"
           register={register}
           errors={errors}
           isRequired={false}
           />
-          <TextInput 
-          label="Store WebSite"
-          name="link"
-          type="url"
-          register={register}
-          errors={errors}
-          />
-          <ImageInput
-          imageUrl={logoUrl}
-          setImageUrl={setLogoUrl}
-          endpoint='storesLogoUploader'
-          label="Store Logo"
-          />
           {/* Toggle component */}
           <ToggleInput
-            label="Publica Store"
+            label="Publica Supplier"
             name="isActive"
             trueTitle="Active"
             falseTitle="Draft"
             register={register}
             />
-        </div>
-        <SubmitButton isLoading={loading} buttonTitle="Create Store" loadingButtonTitle="Creating Store please wait..." />
+          
+          </div>
+        <SubmitButton isLoading={loading} buttonTitle="Create Supplier" loadingButtonTitle="Creating Supplier please wait..." />
       </form> 
     
     </div>
     
   )
 }
-
-

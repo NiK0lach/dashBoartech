@@ -6,14 +6,14 @@ import { Download, Search, Trash2 } from 'lucide-react';
 
 import React from 'react';
 
-export default function products() {
+export default function page() {
   return (
     <div>
       {/* Hearder */}
       <PageHeader
-       heading="Products"
-       href="/dashboard/products/new"
-       linkTitle="Add Products"
+       heading="Electric Community"
+       href="/dashboard/community/new"
+       linkTitle="New Community"
        />
       {/* Table */}
       {/* Export // Search // Bulk Delete */}

@@ -6,7 +6,7 @@ import { makePostRequest } from '@/lib/apiRequest';
 import { generateCouponCode } from '@/lib/generateCouponCode';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import ToggleInput from '@/components/FormInputs/FormInputs/ToggleInput';
 
 
 export default function NewCoupon() {
@@ -20,7 +20,13 @@ export default function NewCoupon() {
     watch,
     handleSubmit,
     formState:{ errors },
-  } = useForm();
+  } = useForm({
+      defaultValues: {
+        isActive:true,
+    },
+  });
+  const isActive = watch("isActive");
+  console.log(isActive);
 
   //const title=watch("title");
   //const expiryDate=watch("expiryDate");
@@ -65,6 +71,14 @@ export default function NewCoupon() {
           errors={errors}
           className='w-full'
           />
+           {/* Toggle component */}
+           <ToggleInput
+            label="Publica Coupon"
+            name="isActive"
+            trueTitle="Active"
+            falseTitle="Draft"
+            register={register}
+            />
         
         
           </div>

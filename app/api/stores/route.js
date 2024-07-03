@@ -2,8 +2,33 @@ import { NextResponse } from "next/server";
 
 export async function POST(request){
     try {
-        const { code, storeTitle, contactPhone, contactEmail, contactAdress, contact, terms, notes  } = await request.json();
-        const newStore = {code, storeTitle, contactPhone, contactEmail, contactAdress, contact, terms, notes  };
+        const { 
+            slug,
+            storeTitle,
+            storePhone,
+            storeEmail,
+            storeAdress,
+            contactName,
+            contactPhone,
+            terms,
+            notes,
+            link,
+            logoUrl,
+           
+         } = await request.json();
+        const newStore = {
+            slug,
+            storeTitle,
+            storePhone,
+            storeEmail,
+            storeAdress,
+            contactName,
+            contactPhone,
+            terms,
+            notes,
+            link,
+            logoUrl,
+            };
        console.log(newStore);
         return  NextResponse.json(newStore);
     } catch (error) {

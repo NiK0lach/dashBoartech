@@ -15,9 +15,9 @@ export default function page() {
        href="/dashboard/banners/new"
        linkTitle="Add Banner"
        />
-      {/* Table */}
-      {/* Export // Search // Bulk Delete */}
-      <TableActions/>
+      {/* Image- description, url */}
+      
+     <TableActions/>
      
      <div className="py-8">
      <h2>Table</h2>

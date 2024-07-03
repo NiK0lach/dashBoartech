@@ -4,14 +4,17 @@ import TextInput from '@/components/FormInputs/FormInputs/TextInput';
 import FormHeader from '@/components/backoffice/FormHeader';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import TextareaInput from '@/components/FormInputs/FormInputs/TexAreaInput';
-import { generateSlug } from '@/lib/generateSlug';
+import TexAreaInput from '@/components/FormInputs/FormInputs/TextAreaInput';
 import ImageInput from '@/components/FormInputs/FormInputs/ImageInput';
-import { makePostRequest } from '@/lib/apiRequest';
 import SelectInput from '@/components/FormInputs/FormInputs/SelectInput';
+import { makePostRequest } from '@/lib/apiRequest';
+import { generateSlug } from '@/lib/generateSlug';
+import ArrayItemsInput from '@/components/FormInputs/FormInputs/ArrayItemsInput';
+import ToggleInput from '@/components/FormInputs/FormInputs/ToggleInput';
 
-export default function NewProducts() {
-  const [imageUrl,setImageUrl] =useState("");
+export default function New() {
+
+  const [imageUrl,setImageUrl]=useState("");
   const categories =[
     {
       id:1,
@@ -30,7 +33,6 @@ export default function NewProducts() {
       title:"Category 4"
     },
   ];
-
   const marcas =[
     {
       id:1,
@@ -49,43 +51,35 @@ export default function NewProducts() {
       title:"marca 4"
     },
   ];
+  
+  const [tags, setTags]=useState([]);
   const [loading,setLoading] =useState(false);
   const {
     register,
     reset,
+    watch,
     handleSubmit,
     formState:{ errors },
-  } = useForm();
+  } = useForm({
+      defaultValues: {
+        isActive:true,
+    },
+  });
+  const isActive = watch("isActive");
+  console.log(isActive);
 
   async function onSubmit(data){
-      {/* 
-      -id=>auto
-      -title
-      -slug=>auto
-      -image/images[]
-      -description
-      -sku
-      -barcode
-      -product price
-      -quantity
-      -sale price
-      -marca
-      -tags
-      */}
-   //setLoading(true)
-
    const slug=generateSlug(data.title);
       data.slug=slug
       data.imageUrl=imageUrl;
+      data.tags=tags;
       console.log(data);
       makePostRequest(setLoading, "api/products", data, "Product", reset);
       setImageUrl("");
-  
-    }   
+  }   
   return (
    <div>
       <FormHeader title="New Product"/>
-
       <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg
        shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3'>
         <div className='grid gap-4 sm:grid-cols-2 sm:gap-6'>
@@ -94,7 +88,7 @@ export default function NewProducts() {
           name="title"
           register={register}
           errors={errors}
-          className='w-full'
+        
           />
            <TextInput 
           label="Product SKU "
@@ -126,44 +120,54 @@ export default function NewProducts() {
           errors={errors}
           className='w-full'
           />
+         
           <SelectInput 
            label="Select Category"
            name="categoryIds"
            register={register}
            errors={errors}
+           multiple={false}
            className='w-full'
            options={categories}
-          
-          />
+           />
            <SelectInput 
            label="Select Marca"
            name="marcaIds"
            register={register}
            errors={errors}
+           multiple={false}
+           options={marcas}
            className='w-full'
-           options={marca}
-          
-          />
-        <TextareaInput 
+           />
+         <TexAreaInput 
             label="Product Description"
             name="description"
             register={register}
             errors={errors}
+             
           />
-          {/* TAGS */}
-
-
+           {/* TAGS */}
+          <ArrayItemsInput setItems={setTags} items={tags} itemTitle="Tag"/>
           <ImageInput 
           imageUrl={imageUrl} 
           setImageUrl={setImageUrl} 
-          endpoint='categoryImageUploader' 
+          endpoint='productImageUploader' 
           label="Product Image" />
-          </div>
-        <SubmitButton isLoading={loading} buttonTitle="Create Category" loadingButtonTitle="Creating Category please wait..." />
+          
+          <ToggleInput
+            label="Publica Producto"
+            name="isActive"
+            trueTitle="Active"
+            falseTitle="Draft"
+            register={register}
+            />
+        
+        </div>
+         
+
+        <SubmitButton isLoading={loading} buttonTitle="Create Product" loadingButtonTitle="Creating Product please wait..." />
       </form> 
-    
-    </div>
-    
+   </div>
   )
 }
 

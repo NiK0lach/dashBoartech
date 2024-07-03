@@ -6,7 +6,7 @@ import { Download, Search, Trash2 } from 'lucide-react';
 
 import React from 'react';
 
-export default function Store() {
+export default function Stores() {
   return (
     <div>
       {/* Hearder */}
