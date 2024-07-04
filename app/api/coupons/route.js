@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import db from "@/lib/db";
+
 
 export async function POST(request){
     try {
@@ -18,6 +18,25 @@ export async function POST(request){
         console.log(error);
         return NextResponse.json({
             message:"Failed to create Coupon",
+            error
+        },{status:500})
+    }
+
+}
+
+
+export async function GET(request){
+    try {
+        const coupon = await db.coupon.findMany({
+            orderBy:{
+                createdAt:"desc",
+            },
+        });
+      return  NextResponse.json(coupon);
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json({
+            message:"Failed to fetch Coupon",
             error
         },{status:500})
     }
