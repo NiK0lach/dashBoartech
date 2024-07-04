@@ -8,29 +8,12 @@ import TextAreaInput from '@/components/FormInputs/FormInputs/TextAreaInput';
 import { generateSlug } from '@/lib/generateSlug';
 import ImageInput from '@/components/FormInputs/FormInputs/ImageInput';
 import { makePostRequest } from '@/lib/apiRequest';
-import SelectInput from '@/components/FormInputs/FormInputs/SelectInput';
 import ToggleInput from '@/components/FormInputs/FormInputs/ToggleInput';
+import { redirect, useRouter } from 'next/navigation';
 
 export default function New() {
   const [imageUrl,setImageUrl] =useState("");
-  const marcas =[
-    {
-      id:1,
-      title:"Patinetas Electricas marca #1"
-    },
-    {
-      id:2,
-      title:"Scooters Electricas marca #1"
-    },
-    {
-      id:3,
-      title:"Biciletas Electricas marca #1"
-    },
-    {
-      id:4,
-      title:"Motos Electricas marca #1"
-    },
-  ]
+  //const marcas =[];
   const [loading,setLoading] =useState(false);
   const {
     register,
@@ -46,6 +29,12 @@ export default function New() {
   const isActive = watch("isActive");
   console.log(isActive);
 
+  const router = useRouter();
+  function redirect(){
+    router.push('/dashboard/categories');
+  }
+   
+
   async function onSubmit(data){
       {/* 
       -id=>auto
@@ -59,7 +48,7 @@ export default function New() {
       data.slug=slug;
       data.imageUrl=imageUrl;
       console.log(data);
-      makePostRequest(setLoading, "api/categories", data, "Category", reset);
+      makePostRequest(setLoading, "api/categories", data, "Category", reset, redirect);
       setImageUrl("");
   
     }   
@@ -75,23 +64,13 @@ export default function New() {
           name="title"
           register={register}
           errors={errors}
-          className='w-full'
           />
-          <SelectInput 
-           label="Select Marca"
-           name="marcaIds"
-           register={register}
-           errors={errors}
-           options={marcas}
-           multiple={true}
-           className='w-full'
-          />
+          
         <TextAreaInput 
             label="Category Description"
             name="description"
             register={register}
             errors={errors}
-            className='w-full'
           />
 
          <ImageInput 

@@ -11,6 +11,7 @@ import { makePostRequest } from '@/lib/apiRequest';
 import { generateSlug } from '@/lib/generateSlug';
 import ArrayItemsInput from '@/components/FormInputs/FormInputs/ArrayItemsInput';
 import ToggleInput from '@/components/FormInputs/FormInputs/ToggleInput';
+import { redirect, useRouter } from 'next/navigation';
 
 export default function New() {
 
@@ -33,7 +34,7 @@ export default function New() {
       title:"Category 4"
     },
   ];
-  const marcas =[
+  const stores =[
     {
       id:1,
       title:"marca 1"
@@ -68,13 +69,19 @@ export default function New() {
   const isActive = watch("isActive");
   console.log(isActive);
 
+  const router = useRouter();
+  function redirect(){
+    router.push('/dashboard/products');
+  }
+   
+
   async function onSubmit(data){
    const slug=generateSlug(data.title);
       data.slug=slug
       data.imageUrl=imageUrl;
       data.tags=tags;
       console.log(data);
-      makePostRequest(setLoading, "api/products", data, "Product", reset);
+      makePostRequest(setLoading, "api/products", data, "Product", reset, redirect);
       setImageUrl("");
   }   
   return (
@@ -107,7 +114,7 @@ export default function New() {
            <TextInput 
           label="Product Price (before discount)"
           name="productPrice"
-          type='number'
+          
           register={register}
           errors={errors}
           className='w-full'
@@ -115,7 +122,7 @@ export default function New() {
            <TextInput 
           label="Product Sale Price (Discounted) "
           name="salePrice"
-          type='number'
+          
           register={register}
           errors={errors}
           className='w-full'
@@ -132,11 +139,11 @@ export default function New() {
            />
            <SelectInput 
            label="Select Marca"
-           name="marcaIds"
+           name="storeIds"
            register={register}
            errors={errors}
            multiple={false}
-           options={marcas}
+           options={stores}
            className='w-full'
            />
          <TexAreaInput 

@@ -43,7 +43,7 @@ export default function New() {
     formState:{ errors },
   } = useForm({
       defaultValues: {
-        isActive:false,
+        isActive:true,
     },
   });
 

@@ -28,6 +28,8 @@ export default function New() {
 
 
   async function onSubmit(data){
+    //USer=nocdesignegth
+    //PW=jvcZ60IwoAekNSYB
      const code = generateUserCode('IRM', data.name);
      data.code = code;
      makePostRequest(setLoading, "api/staffs", data, "Staff", reset)

@@ -5,13 +5,15 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import TextInput from '@/components/FormInputs/FormInputs/TextInput';
 import TextAreaInput from '@/components/FormInputs/FormInputs/TextAreaInput';
-import SelectInput from '@/components/FormInputs/FormInputs/SelectInput';
 import ToggleInput from '@/components/FormInputs/FormInputs/ToggleInput';
 import { makePostRequest } from '@/lib/apiRequest';
+import ImageInput from '@/components/FormInputs/FormInputs/ImageInput';
 import { generateUserCode } from '@/lib/generateUserCode';
+import { redirect, useRouter } from 'next/navigation';
 
 export default function New() {
    const [loading,setLoading] =useState(false);
+   const [logoUrl,setLogoUrl] =useState("");
    const {
       register,
       reset,
@@ -25,12 +27,17 @@ export default function New() {
   });
   const isActive = watch("isActive");
   console.log(isActive);
+  const router = useRouter();
+  function redirect(){
+    router.push('/dashboard/suppliers');
+  }
+   
 
 
   async function onSubmit(data){
      const supplierCode = generateUserCode('IRSN', data.name);
      data.supplierCode = supplierCode;
-     makePostRequest(setLoading, "api/suppliers", data, "Suppliers", reset)
+     makePostRequest(setLoading, "api/suppliers", data, "Suppliers", reset, redirect)
        console.log(data);
  }
   return (
@@ -86,12 +93,20 @@ export default function New() {
           errors={errors}
           className='w-full'
           />
+
+           <ImageInput
+          imageUrl={logoUrl}
+          setImageUrl={setLogoUrl}
+          endpoint='supplierLogoUploader'
+          label="Supplier Logo"
+          />
            
           <TextAreaInput
           label="Suppliers Payment Terms"
           name="paymenterms"
           register={register}
           errors={errors}
+          isRequired={false}
           />
           <TextAreaInput
           label="Notes"

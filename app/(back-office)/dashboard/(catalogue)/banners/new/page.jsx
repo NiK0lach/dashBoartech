@@ -8,6 +8,7 @@ import { generateSlug } from '@/lib/generateSlug';
 import ImageInput from '@/components/FormInputs/FormInputs/ImageInput';
 import { makePostRequest } from '@/lib/apiRequest';
 import ToggleInput from '@/components/FormInputs/FormInputs/ToggleInput';
+import { redirect,  useRouter  } from 'next/navigation';
 
 export default function NewBanner() {
   const [imageUrl,setImageUrl] =useState("");
@@ -25,6 +26,10 @@ export default function NewBanner() {
   });
   const isActive = watch("isActive");
   console.log(isActive);
+    const router = useRouter();
+    function redirect(){
+      router.push('/dashboard/banners');
+    }
 
   async function onSubmit(data){
       {/* 
@@ -38,7 +43,7 @@ export default function NewBanner() {
       data.slug=slug
       data.imageUrl=imageUrl;
       console.log(data);
-      makePostRequest(setLoading, "api/banners", data, "Banner", reset);
+      makePostRequest(setLoading, "api/banners", data, "Banner", reset, redirect);
       setImageUrl("");
   
     }   

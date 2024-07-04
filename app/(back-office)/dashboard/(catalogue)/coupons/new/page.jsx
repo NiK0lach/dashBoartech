@@ -7,6 +7,11 @@ import { generateCouponCode } from '@/lib/generateCouponCode';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import ToggleInput from '@/components/FormInputs/FormInputs/ToggleInput';
+import { generateisoFormattedDate } from '@/lib/generateisoFormattedDate';
+import { redirect, useRouter } from 'next/navigation';
+
+
+
 
 
 export default function NewCoupon() {
@@ -22,17 +27,18 @@ export default function NewCoupon() {
     formState:{ errors },
   } = useForm({
       defaultValues: {
-        isActive:true,
+        isActive: true,
     },
   });
   const isActive = watch("isActive");
-  console.log(isActive);
+  //console.log(isActive);
+  const router = useRouter();
+  function redirect(){
+    router.push('/dashboard/coupons');
+  }
+   
+  
 
-  //const title=watch("title");
-  //const expiryDate=watch("expiryDate");
-  //console.log(title, expiryDate);
-  //console.log(coupon); 
-  //const coupon = generateCouponCode(title,expiryDate);
   async function onSubmit(data){
       {/* 
       -id=>auto
@@ -42,18 +48,17 @@ export default function NewCoupon() {
       */}
    //setLoading(true)
    const couponCode = generateCouponCode(data.title, data.expiryDate);
+   const isoFormattedDate = generateisoFormattedDate(data.expiryDate);
+   data.expiryDate= isoFormattedDate;
    data.couponCode = couponCode;
-   makePostRequest(setLoading, "api/coupons", data, "Coupon", reset)
-      console.log(data);
-    
-  
-    }   
+   console.log(data);
+   makePostRequest(setLoading, "api/coupons", data, "Coupon", reset, redirect);
+  }   
   return (
    <div>
       <FormHeader title="New Coupon"/>
-
-      <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg
-       shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3'>
+        <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg
+           shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3'>
         <div className='grid gap-4 sm:grid-cols-2 sm:gap-6'>
           <TextInput 
           label="Coupon Title"

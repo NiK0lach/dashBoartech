@@ -10,7 +10,7 @@ export async function POST(request){
             contact,
             contactphone,
             paymenterms,
-            notes,} = await request.json();
+            notes,isActive,profileImageUrl} = await request.json();
         const newSupplier = { supplierCode,
             name,
             phone,
@@ -19,7 +19,7 @@ export async function POST(request){
             contact,
             contactphone,
             paymenterms,
-            notes,};
+            notes,isActive,profileImageUrl};
         console.log(newSupplier);
         return  NextResponse.json(newSupplier);
     } catch (error) {

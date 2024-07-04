@@ -39,5 +39,12 @@ export const ourFileRouter = {
       console.log("file url", file.url, metadata);
       return { uploadedBy: "nik"};
     }),
+      // Define as many FileRoutes as you like, each with a unique routeSlug
+      supplierLogoUploader: f({ image: { maxFileSize: "1MB" } })
+      // Set permissions and file types for this FileRoute
+      .onUploadComplete(async ({ metadata, file }) => {
+        console.log("file url", file.url, metadata);
+        return { uploadedBy: "nik"};
+      }),
 };
 

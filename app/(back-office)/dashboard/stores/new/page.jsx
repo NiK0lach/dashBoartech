@@ -14,9 +14,11 @@ import ToggleInput from '@/components/FormInputs/FormInputs/ToggleInput';
 
 
 
+
 export default function New() {
   const [logoUrl,setLogoUrl] =useState("");
   const [loading,setLoading] =useState(false);
+  const categories =[{id:1,title:"Categori 1"},{id:1,title:"Categori 1"}]
   const {
     register,
     reset,
@@ -62,6 +64,15 @@ export default function New() {
           register={register}
           errors={errors}
           className='w-full'
+          />
+          <SelectInput
+           label="Selecciona Categorias"
+           name="categoriesIds"
+           register={register}
+           errors={errors}
+           options={categories}
+           multiple={true}
+           className='w-full'
           />
            <TextInput 
           label="Store Phone Number"
@@ -120,6 +131,7 @@ export default function New() {
           type="url"
           register={register}
           errors={errors}
+          isRequired={false}
           />
           <ImageInput
           imageUrl={logoUrl}
