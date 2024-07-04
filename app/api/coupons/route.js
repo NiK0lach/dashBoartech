@@ -1,3 +1,4 @@
+import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 
@@ -27,18 +28,18 @@ export async function POST(request){
 
 export async function GET(request){
     try {
-        const coupon = await db.coupon.findMany({
-            orderBy:{
-                createdAt:"desc",
-            },
-        });
-      return  NextResponse.json(coupon);
+        const coupons = await db.coupon.findMany();
+        return NextResponse.json(coupons);
+      
     } catch (error) {
         console.log(error);
-        return NextResponse.json({
+        return NextResponse.json(
+         {
             message:"Failed to fetch Coupon",
-            error
-        },{status:500})
+            error,
+        },
+        { status:500 }
+     );
     }
 
 }

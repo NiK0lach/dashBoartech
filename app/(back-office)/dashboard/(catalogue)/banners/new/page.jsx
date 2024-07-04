@@ -13,6 +13,7 @@ import { redirect,  useRouter  } from 'next/navigation';
 export default function NewBanner() {
   const [imageUrl,setImageUrl] =useState("");
   const [loading,setLoading] =useState(false);
+ 
   const {
     register,
     reset,
@@ -21,7 +22,7 @@ export default function NewBanner() {
     formState:{ errors },
   } = useForm({
       defaultValues: {
-        isActive:true,
+        isActive: true,
     },
   });
   const isActive = watch("isActive");
@@ -65,15 +66,16 @@ export default function NewBanner() {
           label="Banner Link"
           name="link"
           register={register}
-          type='url'
           errors={errors}
+          isRequired={false}
           />
        {/* COnfigure thi endpoint in the core s. */}
          <ImageInput 
+          label="Banner Image"
           imageUrl={imageUrl} 
           setImageUrl={setImageUrl} 
           endpoint='bannerImageUploader' 
-          label="Banner Image" />
+           />
           
            {/* Toggle component */}
           <ToggleInput

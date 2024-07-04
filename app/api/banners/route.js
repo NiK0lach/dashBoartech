@@ -1,10 +1,15 @@
+import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 
 export async function POST(request){
     try {
         const { title, link, imageUrl, isActive } = await request.json();
-        const newBanner = { title, link, imageUrl, isActive };
+        const newBanner = await db.banner.create({
+            data:{
+                title, link, imageUrl, isActive 
+            }
+        });
         console.log(newBanner);
         return  NextResponse.json(newBanner);
     } catch (error) {
@@ -20,20 +25,18 @@ export async function POST(request){
 
 export async function GET(request){
     try {
-        const banners = await db.banners.findMany({
-            orderBy:{
-                createdAt:"desc",
-            },
-        });
-       
-      return  NextResponse.json(banners);
-      //console.log(banners);
+        const banners = await db.banner.findMany();
+        return NextResponse.json(banners);
+      
     } catch (error) {
         console.log(error);
-        return NextResponse.json({
-            message:"Failed to fetch Banner",
-            error
-        },{status:500})
+        return NextResponse.json(
+         {
+            message:"Failed to fetch Banners",
+            error,
+        },
+        { status:500 }
+     );
     }
 
 }

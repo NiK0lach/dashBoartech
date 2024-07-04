@@ -22,6 +22,7 @@ model Coupon{
   couponCode String
   expiryDate DateTime
   isActive Boolean
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -29,8 +30,10 @@ model Coupon{
 model Banner{
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   title String
+  link String
   imageUrl String
   isActive Boolean
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
