@@ -1,0 +1,8 @@
+our current IP address (181.58.64.72) has been added to enable local connectivity. Add another later in
+
+nocdesignegth
+jvcZ60IwoAekNSYB
+
+mongodb+srv://nocdesignegth:<jvcZ60IwoAekNSYB>@cluster0.7vm4xuq.mongodb.net/
+
+mongodb+srv://nocdesignegth:jvcZ60IwoAekNSYB@cluster0.7vm4xuq.mongodb.net/
