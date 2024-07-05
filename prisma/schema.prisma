@@ -42,7 +42,7 @@ model Category {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   title      String 
   slug       String @unique
-  imageUrl  String?
+  imageUrl   String?
   description String?   
   isActive Boolean
 
@@ -127,8 +127,8 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime?
-
-
+  password      String
+ 
   products Product[]
 
   role          UserRole @default(USER)
