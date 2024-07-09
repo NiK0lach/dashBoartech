@@ -1,7 +1,5 @@
 import NewProductForm from '@/components/backoffice/NewProductForm'
 import { getData } from '@/lib/getData'
-import { title } from 'faker/lib/locales/az';
-
 import React from 'react'
 
 export default async function NewProduct() {

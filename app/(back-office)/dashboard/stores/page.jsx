@@ -1,7 +1,7 @@
 
 import PageHeader from '@/components/backoffice/PageHeader';
 import TableActions from '@/components/backoffice/TableActions';
-import { Download, Search, Trash2 } from 'lucide-react';
+
 
 
 import React from 'react';
