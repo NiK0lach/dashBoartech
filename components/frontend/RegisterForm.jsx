@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -8,7 +7,7 @@ import toast from "react-hot-toast";
 import SubmitButton from "../FormInputs/FormInputs/SubmitButton";
 import TextInput from "../FormInputs/FormInputs/TextInput";
 
-export default function RegisterForm() {
+export default function RegisterForm({role="USER"}) {
   const router = useRouter();//redirect on the client side
   const {
     register,
@@ -38,7 +37,15 @@ export default function RegisterForm() {
         setLoading(false);
         toast.success("User Created Successfully");
         reset();
-       // router.push("/login");
+        //if role=user => back home
+        //if  role= supplier => onboarding
+        //const userRole=responseData.data.role;
+        if(role==="USER"){
+           router.push("/");
+          } else {
+            router.push(`/onboarding/${responseData.data.id}`);
+          }
+       
       } else {
         setLoading(false);
         if (response.status === 409) {
@@ -59,6 +66,15 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="">
+     <TextInput 
+      label=""
+      name="role"
+      register={register}
+      errors={errors}
+      type="hidden"
+      defaultValue={role}
+      className="sm:col-span-2 mb-3"
+      />
      <TextInput 
       label="Nombre completo"
       name="name"

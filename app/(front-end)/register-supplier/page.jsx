@@ -10,7 +10,8 @@ export default function Register() {
           href="#"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
         >
-          <Image className="w-8 h-8 mr-2" width={50} height={50}
+          <Image
+            className="w-8 h-8 mr-2" width="10" height="10" 
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
             alt="logo"
           />
@@ -21,7 +22,7 @@ export default function Register() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
               Create a new account
             </h1>
-          <RegisterForm role="USER" />
+          <RegisterForm role="SUPPLIER" />
           </div>
         </div>
       </div>

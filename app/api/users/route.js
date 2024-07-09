@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 export async function POST(request){
     try {
       //extract credetendials
-      const { name, email, password } = await request.json();
+      const { name, email, password, role} = await request.json();
       //check if usera lready exits
       const existingUser= await db.user.findUnique({
         where: {
@@ -26,6 +26,7 @@ export async function POST(request){
             name,
             email,
             password: hashedPassword,
+            role
         },
       });
       console.log(newUser);
@@ -33,6 +34,7 @@ export async function POST(request){
         {
         data: newUser,
         message: "Usuario creado!",
+        
        },
        {status:201}
    );
@@ -46,4 +48,28 @@ export async function POST(request){
             { status:500 }
         );
     }
+}
+
+export async function GET(request){
+  try {
+      const users = await db.user.findMany(
+          {
+              orderBy:{
+                  createdAt:"desc",
+              }
+          }
+      );
+      return NextResponse.json(users);
+    
+  } catch (error) {
+      console.log(error);
+      return NextResponse.json(
+       {
+          message:"Failed to fetch User",
+          error,
+      },
+      { status:500 }
+   );
+  }
+
 }
