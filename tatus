@@ -1,0 +1,65 @@
+[33mcommit d96154bc948f85f312ab4bac11842f539b7e9244[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Niko <nocdesignegth@gmail.com>
+Date:   Thu Jul 4 22:15:06 2024 -0500
+
+    strtaingUserValidation
+
+[33mcommit 42dcd78718d3219b93c96e0588a1f656b4d79373[m
+Author: Niko <nocdesignegth@gmail.com>
+Date:   Thu Jul 4 14:39:08 2024 -0500
+
+    workingPostGetStarter
+
+[33mcommit 28c77eaeb64e615b4fed53e5bdbdf54327049b0b[m
+Author: Niko <nocdesignegth@gmail.com>
+Date:   Thu Jul 4 12:38:03 2024 -0500
+
+    beforeNpmPrismaStuidoLoad
+
+[33mcommit afd64045a7e6e85b7f09ff0c62ae9bd493d8c1e8[m
+Author: Niko <nocdesignegth@gmail.com>
+Date:   Thu Jul 4 11:43:43 2024 -0500
+
+    mongoDbConectedStoreDbCollection01
+
+[33mcommit 7c74a07e8e4b4b6b84384b99c3544006c1deb409[m
+Author: Niko <nocdesignegth@gmail.com>
+Date:   Wed Jul 3 14:06:29 2024 -0500
+
+    ´before-dataBd
+
+[33mcommit 5c1e472df4a6bf7013a329dba5b7c13e639398fc[m
+Author: Niko <nocdesignegth@gmail.com>
+Date:   Tue Jul 2 08:20:09 2024 -0500
+
+    startingSlidestut
+
+[33mcommit 21d6edbfde7e1b12d3d63209fefc490e0a094eec[m
+Author: Niko <nocdesignegth@gmail.com>
+Date:   Tue May 21 09:53:05 2024 -0500
+
+    starting-products
+
+[33mcommit 2d72f5ae1272d4da669fee36810fc05bf74fa63f[m
+Author: Niko <nocdesignegth@gmail.com>
+Date:   Mon May 20 12:17:36 2024 -0500
+
+    start-slides
+
+[33mcommit f9c2ce5e998d9907c04038213d19022e74650539[m
+Author: Niko <nocdesignegth@gmail.com>
+Date:   Mon May 20 09:21:56 2024 -0500
+
+    start-coupons
+
+[33mcommit a20d3ec58b13ab292446d8c1aab65951000bab9c[m
+Author: Niko <nocdesignegth@gmail.com>
+Date:   Sun May 19 09:53:09 2024 -0500
+
+    starter-to-images
+
+[33mcommit f13917395e0610a9bcafabe90082ddc39f445849[m
+Author: Niko <nocdesignegth@gmail.com>
+Date:   Sun Apr 28 15:06:05 2024 -0500
+
+    Initial commit from Create Next App

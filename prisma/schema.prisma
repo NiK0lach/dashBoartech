@@ -61,7 +61,7 @@ model Store {
   storeTitle       String    
   slug       String @unique
   description String? 
-  logoUrl String?
+  imageUrl String?
   storePhone String?
   storeEmail String?
   storeAdress String?
@@ -89,7 +89,7 @@ model Product {
   salePrice    Float
   isWholesale  Boolean
   saleTotalPrice Float
-  wholsaQty Intn
+  wholsaQty Int
   productStock Int
   qty  Int
   description  String?
@@ -119,6 +119,9 @@ model Training{
 
   category   Category  @relation(fields: [categoryId], references: [id])
   categoryId String @db.ObjectId
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime?  @updatedAt
 }
 
 enum UserRole {

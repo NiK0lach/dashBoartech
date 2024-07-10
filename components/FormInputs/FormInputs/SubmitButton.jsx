@@ -34,7 +34,7 @@ export default function SubmitButton({ isLoading=false, buttonTitle, loadingButt
     ) : (
       <button
         type="submit"
-        className="inline-flex items-center px-5 py-3 mt-4 sm:mt-6 text-sm font-medium text-center
+        className="inline-flex items-center px-5 py-2 mt-4 sm:mt-6 text-sm font-medium text-center
          text-white bg-slate-800 hover:bg-slate-500 rounded-lg focus:ring-4 focus:ring-blue-200
          dark:focus:ring-blue-900 dark:hover:bg-lime-700 dark:bg-lime-600"
       >

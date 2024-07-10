@@ -88,6 +88,7 @@ export default function NewProductForm({categories,suppliers}) {
       console.log(data);
       makePostRequest(setLoading, "api/products", data, "Product", reset, redirect);
       setImageUrl("");
+      setTags([]);
   }   
   return (
    <div>

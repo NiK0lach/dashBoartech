@@ -19,6 +19,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "faker": "^5.5.3",
+    "flowbite": "^2.4.1",
+    "flowbite-react": "^0.10.1",
     "lucide-react": "^0.376.0",
     "next": "14.2.3",
     "next-themes": "^0.3.0",
