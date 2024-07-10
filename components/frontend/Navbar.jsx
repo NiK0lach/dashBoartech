@@ -12,7 +12,7 @@ import HelpModal from './HelpModal'
 export default function Navbar() {
   return (
     <div className='bg-gray-300 dark:bg-gray-600'>
-        <div className='flex items-center justify-between py-3 max-w-7xl mx-auto px-8  gap-8'>
+        <div className='flex items-center justify-between py-3 max-w-6xl mx-auto px-8 gap-8'>
             <Link className="" href="/">
                 <Image src={Logo} alt="Gernik Logo" className="w-24" />
             </Link>
