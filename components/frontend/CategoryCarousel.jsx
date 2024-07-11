@@ -5,7 +5,7 @@ import React from 'react';
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
 
-export default function CategoryCarousel() {
+export default function CategoryCarousel({products}) {
     const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
@@ -23,7 +23,7 @@ export default function CategoryCarousel() {
           slidesToSlide: 1 // optional, default to 1.
         }
       };
-      const sliders =[{},{},{},{},{},{},{}];
+      
   return (
     <Carousel
         swipeable={false}
@@ -44,16 +44,16 @@ export default function CategoryCarousel() {
         itemClass="carousel-item px-4"
         >
 
-        { sliders.map((slider, i) => {
+        { products.map((product, i) => {
             return (
                 <Link key={i} href="#" alt="" className='rounded-lg mr-3'>
                 <Image
-                src="/assets/images/banner/bn-0Artboard 1.jpg"
-                alt=''
+                src={product.imageUrl}
+                alt={product.title}
                 width={80} 
                 height={80} 
                 className='w-full' />
-                <h2 className='text-center dark:text-slate-200 mt-2 text-slate-800'> item 1</h2>
+                <h2 className='text-center dark:text-slate-200 mt-2 text-slate-800'>{product.title}</h2>
                 </Link>
             );
             })

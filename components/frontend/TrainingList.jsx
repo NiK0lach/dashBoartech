@@ -1,9 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
 import TrainingCarousel from './TrainingCarousel'
+import { getData } from '@/lib/getData'
 
 
-export default function TrainingList() {
+export default async function TrainingList() {
+  const training = await getData('training');
   return (
     <div className='bg-white border border-gray-300 dark:border-gray-700 rounded-lg
          dark:bg-gray-800 text-slate-800 overflow-hidden mt-6'>
@@ -15,7 +17,7 @@ export default function TrainingList() {
              href="#" alt="">Ver mas</Link>
         </div>
        <div className="bg-white dark:bg-slate-900 py-4">
-           <TrainingCarousel/>
+           <TrainingCarousel training={training}/>
        </div>
     </div>
   )
