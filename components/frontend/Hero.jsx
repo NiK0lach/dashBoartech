@@ -1,13 +1,16 @@
+'use client';
+import React from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
+import HeroCarrousel from './HeroCarrousel';
+
 
 export default function Hero() {
     const categories = [
         {},{},{},{},{},
     ]
   return (
-    <div className='flex gap-8'>
+    <div className='flex gap-8 mb-6'>
         <div className="w-1/3 bg-white border border-gray-300 dark:border-gray-700 rounded-lg
          dark:bg-gray-800 text-slate-800 overflow-hidden ">
          <h2 className='bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-100
@@ -35,8 +38,8 @@ export default function Hero() {
             
          </div>
         </div>
-        <div className="w-2/3 bg-blue-800 rounded-md py-3 px-6">
-        Carrousel
+        <div className="w-2/3 bg-blue-800 rounded-md ">
+          <HeroCarrousel/>
         </div>
     </div>
   );

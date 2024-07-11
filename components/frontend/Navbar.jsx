@@ -34,7 +34,7 @@ export default function Navbar() {
                         <ShoppingCart className="text-lime-700 dark:text-lime-500" />
                         <span className="sr-only">Carta</span>
                         <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500  rounded-full -top-0 end-6 dark:border-gray-900">
-                        20
+                        25
                         </div>
                   </Link>
                   
