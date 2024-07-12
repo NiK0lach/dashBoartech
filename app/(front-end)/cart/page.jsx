@@ -17,7 +17,8 @@ export default function Cart() {
                 <h2 className="uppercase">Quantity</h2>
                 <h2 className="uppercase">Price</h2>
               </div>
-              <div className=''>
+
+              <div className='border-b'>
                  <div className='flex items-center justify-between text-slate-600
                    dark:text-slate-200 pb-3 font-semibold text-sm'>
                     <div className="flex items-center gap-3">
@@ -45,13 +46,28 @@ export default function Cart() {
                     </div>
                     <div className="flex items-center gap-2">
                       <h4>$278.000</h4>
-                      <button><Trash2 className='dark:text-red-600 h-5 w-5 '/></button>
+                      <button><Trash2 className='dark:text-red-600 h-5 w-5 hover:text-white dark:hover:text-white'/></button>
                     </div>
                   </div>
               </div>
+              {/* CouponForm */}
+              <div className="flex items-center gap-2 py-4 px-3">
+              <input 
+                type="text" 
+                id="email"
+                aria-describedby='helper-text-explanation'
+                className="bg-gray-50 border border-gray-300
+               text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block 
+                 ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+               dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-1/2"
+                placeholder="name@electrnik.com"/>
+                <button className='shrink-0 py-2.5 px-4 rounded-lg bg-lime-600 hover:bg-lime-400 dark:hover:bg-lime-800'>Apply coupon</button>
+              </div>
+              
          </div>
          
-         <div className="col-span-4 sm:block  bg-white border border-gray-300 dark:border-gray-700 rounded-lg
+         <div className="col-span-4 sm:block  bg-white border border-gray-300
+          dark:border-gray-700 rounded-lg
             dark:bg-gray-800 text-slate-800 overflow-hidden p-5">
               <span className='text-3xl dark:text-slate-100'>Card Total</span>
               <div className="flex items-center justify-between border-b border-gray-600 pb-3">
