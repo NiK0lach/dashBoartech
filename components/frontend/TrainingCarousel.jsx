@@ -28,7 +28,7 @@ export default function TrainingCarousel({training}) {
   return (
     <Carousel
         swipeable={true}
-        draggable={false}
+        draggable={true}
         showDots={false}
         responsive={responsive}
         ssr={true} // means to render carousel on server-side.
@@ -39,7 +39,7 @@ export default function TrainingCarousel({training}) {
         customTransition="all .5"
         transitionDuration={500}
         containerClass="carousel-container"
-        removeArrowOnDeviceType={["tablet", "mobile"]}
+        removeArrowOnDeviceType={["tablet", "mobile","desktop"]}
         //deviceType={this.props.deviceType}
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item px-4"
@@ -55,7 +55,7 @@ export default function TrainingCarousel({training}) {
                             alt={training.title}
                             width={566} 
                             height={566} 
-                            className='w-full rounded-sm' />
+                            className='w-full rounded-sm h-48 object-cover' />
                     </Link>
                         <h2 className='text-center dark:text-slate-200 text-slate-800
                          py-2 text-2xl font-medium bg-slate-200 dark:bg-slate-900'>{training.title}</h2>

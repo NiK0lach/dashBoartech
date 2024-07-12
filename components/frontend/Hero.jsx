@@ -42,8 +42,6 @@ export default async function Hero() {
             </Link>
             <Image src={advert} alt='' className='w-full rounded-lg' />
         </div>
-        
-
     </div>
   );
 }
