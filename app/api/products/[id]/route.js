@@ -2,25 +2,22 @@ import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 
-export async function GET(request, { params: { id } }){
+export async function GET(request){
     try {
-        const supplier = await db.user.findMany(
+        const products = await db.product.findMany(
             {
-                where:{
-                    id,
-                },
-                include: {
-                    supplierProfile:true,
-                },
-            },
+                orderBy:{
+                    createdAt:"desc",
+                }
+            }
         );
-        return NextResponse.json(supplier);
+        return NextResponse.json(products);
       
     } catch (error) {
         console.log(error);
         return NextResponse.json(
          {
-            message:"Failed to fetch supplier",
+            message:"Failed to fetch product",
             error,
         },
         { status:500 }
@@ -31,30 +28,30 @@ export async function GET(request, { params: { id } }){
 
 export async function DELETE(request,{params:{id}}){
     try {
-        const existingSupplier = await db.user.findUnique({
+        const existingProduct = await db.product.findUnique({
             where:{
               id,
             },
         });
-        if(!existingSupplier){
+        if(!existingProduct){
             return NextResponse.json({
                 data:null,
-                message:"supplier not found",
+                message:"product not found",
             },{status:404}
           );
         }
-        const deletedSupplier= await db.user.delete({
+        const deletedProduct= await db.product.delete({
             where:{
                 id,
               }, 
         });
-        return NextResponse.json(deletedSupplier);
+        return NextResponse.json(deletedProduct);
       
     } catch (error) {
         console.log(error);
         return NextResponse.json(
          {
-            message:"Failed to delete supplier ",
+            message:"Failed to delete product ",
             error,
         },
         { status:500 }

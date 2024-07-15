@@ -46,6 +46,12 @@ export const columns  = [
       header: "Email",
     
     },
+    {
+      accessorKey: "role",
+      header: "Role",
+    
+    },
+    
     
     {
       accessorKey: "isActive",

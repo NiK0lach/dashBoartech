@@ -54,20 +54,26 @@ export async function POST(request){
 
 export async function GET(request){
     try {
-        const profiles = await db.SupplierProfile.findMany(
+        const suppliers = await db.user.findMany(
             {
                 orderBy:{
                     createdAt:"desc",
-                }
+                },
+                where: {
+                    role:"SUPPLIER",
+                },
+                include: {
+                    supplierProfile:true,
+                },
             }
         );
-        return NextResponse.json(profiles);
+        return NextResponse.json(suppliers);
       
     } catch (error) {
         console.log(error);
         return NextResponse.json(
          {
-            message:"Failed to fetch profile",
+            message:"Failed to fetch supplier",
             error,
         },
         { status:500 }
