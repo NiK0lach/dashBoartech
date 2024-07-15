@@ -5,11 +5,11 @@ export async function GET(request,{params:{id}}){
     try {
         const category = await db.category.findUnique({
             where:{
-              id
+              id,
             },
             include:{
               products:true,
-             }
+             },
         });
         return NextResponse.json(category);
       
@@ -18,6 +18,41 @@ export async function GET(request,{params:{id}}){
         return NextResponse.json(
          {
             message:"Failed to fetch category ",
+            error,
+        },
+        { status:500 }
+     );
+    }
+
+}
+
+
+export async function DELETE(request,{params:{id}}){
+    try {
+        const existingCategory = await db.category.findUnique({
+            where:{
+              id,
+            },
+        });
+        if(!existingCategory){
+            return NextResponse.json({
+                data:null,
+                message:"Category not found",
+            },{status:404}
+          );
+        }
+        const deletedCategory= await db.category.delete({
+            where:{
+                id,
+              }, 
+        });
+        return NextResponse.json(deletedCategory);
+      
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json(
+         {
+            message:"Failed to delete category ",
             error,
         },
         { status:500 }

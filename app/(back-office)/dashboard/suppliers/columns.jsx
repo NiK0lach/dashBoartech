@@ -31,24 +31,22 @@ export const columns  = [
     enableHiding: false,
   },
     {
-      accessorKey: "title",
+      accessorKey: "name",
       header: ({ column }) => (
-        <SortableColumn column={column} title="title"/>
+        <SortableColumn column={column} title="Name"/>
       )
     },
     {
       accessorKey: "imageUrl",
-      header: "Cat Imagen",
+      header: "Suppliers Imagen",
       cell: ({ row }) => (<ImageColumn row={row} accessorKey="imageUrl"/>)
     },
-    // {
-    //     accessorKey: "description",
-    //     header: "Descripcion",
-    //     cell: ({ row }) => {
-    //       const description = row.getValue("description")
-    //       return <div  className="line-clamp-1">{description}</div>
-    //     },
-    // }, 
+    {
+      accessorKey: "email",
+      header: "Email",
+    
+    },
+    
     {
       accessorKey: "isActive",
       header: "Estado",
@@ -62,14 +60,7 @@ export const columns  = [
     },
     {
       id: "actions",
-      cell: ({ row }) => {
-        const category = row.original;
-        return <ActionColumn
-        row={row}
-        title="category"
-        endpoint={`categories/${category.id}`}
-        />
-      }
-
+      cell: ({ row }) => (<ActionColumn row={row} title="Suppliers"/>),
+      
     },
 ];

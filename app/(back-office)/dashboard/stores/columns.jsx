@@ -31,14 +31,14 @@ export const columns  = [
     enableHiding: false,
   },
     {
-      accessorKey: "title",
+      accessorKey: "storeTitle",
       header: ({ column }) => (
-        <SortableColumn column={column} title="title"/>
+        <SortableColumn column={column} title="Tienda"/>
       )
     },
     {
       accessorKey: "imageUrl",
-      header: "Cat Imagen",
+      header: "Stores Imagen",
       cell: ({ row }) => (<ImageColumn row={row} accessorKey="imageUrl"/>)
     },
     // {
@@ -62,14 +62,7 @@ export const columns  = [
     },
     {
       id: "actions",
-      cell: ({ row }) => {
-        const category = row.original;
-        return <ActionColumn
-        row={row}
-        title="category"
-        endpoint={`categories/${category.id}`}
-        />
-      }
-
+      cell: ({ row }) => (<ActionColumn row={row} title="Stores"/>),
+      
     },
 ];

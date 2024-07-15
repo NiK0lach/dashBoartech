@@ -1,27 +1,24 @@
-
-import PageHeader from '@/components/backoffice/PageHeader';
-import TableActions from '@/components/backoffice/TableActions';
-
-
-
 import React from 'react';
+import PageHeader from '@/components/backoffice/PageHeader';
+import DataTable from '@/components/data-table-components/DataTable';
+import { getData } from '@/lib/getData';
+import { columns } from './columns';
 
-export default function Stores() {
+export default async function Stores() {
+  const stores = await getData('stores');
   return (
     <div>
-      {/* Hearder */}
+      
       <PageHeader
        heading="Store"
        href="/dashboard/stores/new"
        linkTitle="Add Store"
        />
-      {/* Table */}
-      {/* Export // Search // Bulk Delete */}
-      <TableActions/>
+      
      
-     <div className="py-8">
-     <h2>Table</h2>
-     </div>
+      <div className="py-8">
+      <DataTable data={stores} columns={columns} filterKeys={["storeTitle"]} />
+      </div>
     </div>
   )
 }
