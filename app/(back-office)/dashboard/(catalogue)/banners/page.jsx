@@ -1,29 +1,24 @@
 
-import PageHeader from '@/components/backoffice/PageHeader';
-import TableActions from '@/components/backoffice/TableActions';
-import { Download, Search, Trash2 } from 'lucide-react';
-
-
 import React from 'react';
+import PageHeader from '@/components/backoffice/PageHeader';
+import DataTable from '@/components/data-table-components/DataTable';
+import { getData } from '@/lib/getData';
+import { columns } from './columns';
 
-export default function page() {
+export default async function page() {
+  const banners = await getData('banners');
   return (
     <div>
-      {/* Hearder */}
       <PageHeader
-       heading="Banner"
+       heading="Banners"
        href="/dashboard/banners/new"
        linkTitle="Add Banner"
        />
-      {/* Image- description, url */}
-      
-     <TableActions/>
-     
      <div className="py-8">
-     <h2>Table</h2>
+      <DataTable data={banners} columns={columns} />
      </div>
     </div>
-  )
+  );
 }
 
 

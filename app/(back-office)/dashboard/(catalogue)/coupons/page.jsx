@@ -1,26 +1,22 @@
-
-import PageHeader from '@/components/backoffice/PageHeader';
-import TableActions from '@/components/backoffice/TableActions';
-import { Download, Search, Trash2 } from 'lucide-react';
-
-
 import React from 'react';
+import PageHeader from '@/components/backoffice/PageHeader';
+import DataTable from '@/components/data-table-components/DataTable';
+import { getData } from '@/lib/getData';
+import { columns } from './columns';
 
-export default function coupons() {
+export default async function coupons() {
+  const coupons = await getData('coupons');
   return (
     <div>
-      {/* Hearder */}
       <PageHeader
        heading="Coupons"
        href="/dashboard/coupons/new"
        linkTitle="Add Coupon"
        />
-      {/* Table */}
-      {/* Export // Search // Bulk Delete */}
-      <TableActions/>
+      
      
      <div className="py-8">
-     <h2>Table</h2>
+     <DataTable data={coupons} columns={columns} />
      </div>
     </div>
   )

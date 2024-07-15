@@ -1,29 +1,26 @@
-
-import PageHeader from '@/components/backoffice/PageHeader';
-import TableActions from '@/components/backoffice/TableActions';
-import { Download, Search, Trash2 } from 'lucide-react';
-
-
 import React from 'react';
+import PageHeader from '@/components/backoffice/PageHeader';
+import DataTable from '@/components/data-table-components/DataTable';
+import { getData } from '@/lib/getData';
+import { columns } from './columns';
 
-export default function products() {
+
+export default async function products() {
+  const products = await getData('products');
   return (
     <div>
-      {/* Hearder */}
+      
       <PageHeader
        heading="Products"
        href="/dashboard/products/new"
        linkTitle="Add Products"
        />
-      {/* Table */}
-      {/* Export // Search // Bulk Delete */}
-      <TableActions/>
-     
+      
      <div className="py-8">
-     <h2>Table</h2>
+     <DataTable data={products} columns={columns} />
      </div>
     </div>
-  )
+  );
 }
 
 

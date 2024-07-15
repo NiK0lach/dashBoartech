@@ -1,29 +1,24 @@
 
-import PageHeader from '@/components/backoffice/PageHeader';
-import TableActions from '@/components/backoffice/TableActions';
-import { Download, Search, Trash2 } from 'lucide-react';
-
-
 import React from 'react';
+import PageHeader from '@/components/backoffice/PageHeader';
+import DataTable from '@/components/data-table-components/DataTable';
+import { getData } from '@/lib/getData';
+import { columns } from './columns';
 
-export default function page() {
+export default async function page() {
+  const categories = await getData('categories');
   return (
-    <div>
-      {/* Hearder */}
-      <PageHeader
-       heading="Category"
-       href="/dashboard/categories/new"
-       linkTitle="Add Category"
-       />
-      {/* Table */}
-      {/* Export // Search // Bulk Delete */}
-      <TableActions/>
-     
-     <div className="py-8">
-     <h2>Table</h2>
-     </div>
+     <div>
+        <PageHeader
+          heading="Categories"
+          href="/dashboard/categories/new"
+          linkTitle="Add Category"
+          />
+       <div className="py-8">
+        <DataTable data={categories} columns={columns} />
+        </div>
     </div>
-  )
+  );
 }
 
 
