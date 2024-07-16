@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(request){
     try {
         const  { title, slug, description, imageUrl, isActive } = await request.json();
+
         const exixtingCategory=await db.category.findUnique({
             where:{
                 slug,
@@ -12,7 +13,7 @@ export async function POST(request){
         if(exixtingCategory){
             return NextResponse.json({
                 data:null,
-                message:"Categoria ya existe",
+                message:`Categoria (${title}) ya existe`,
             },{ status: 409}
           );
         }
@@ -38,7 +39,7 @@ export async function GET(request){
             },
             include:{
               products:true,
-             }
+             },
         });
         return NextResponse.json(categories);
       

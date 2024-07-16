@@ -2,16 +2,15 @@ import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 
-export async function GET(request){
+export async function GET(request,{params:{id}}){
     try {
-        const products = await db.product.findMany(
-            {
-                orderBy:{
-                    createdAt:"desc",
-                }
-            }
-        );
-        return NextResponse.json(products);
+        const product = await db.product.findUnique({
+            where:{
+                id,
+              },
+              
+            });
+        return NextResponse.json(product);
       
     } catch (error) {
         console.log(error);
@@ -56,6 +55,82 @@ export async function DELETE(request,{params:{id}}){
         },
         { status:500 }
      );
+    }
+
+}
+
+export async function PUT(request,{params:{id}}){
+    try {
+        const  { 
+           
+                slug,
+                title,
+                sku, 
+                barcode, 
+                categoryId,
+                userId:supplierId,
+                productPrice,
+                salePrice,
+                isWholesale,
+                saleTotalPrice,
+                wholsaQty,
+                productStock,
+                qty,
+                description, 
+                tags,
+                imageUrl,    
+                isActive,
+                productCode } = await request.json();
+        
+        const exixtingProduct=await db.product.findUnique({
+            where:{
+                id,
+            },
+            // include:{
+            //     categoryId:true,
+            //     userId:true,
+            //    },
+        });
+        if(!exixtingProduct){
+            return NextResponse.json({
+                data:null,
+                message:`Producto (${title}) no se encuentra`,
+            },{ status: 404}
+          );
+        }
+        const updatedProduct = await db.product.update({
+            where:{ id },
+            // include:{
+            //     categoryId:true,
+            //     userId:true,
+            //        },
+            data: {
+                slug,
+                title,
+                sku, 
+                barcode, 
+                categoryId,
+                userId:supplierId,
+                productPrice:parseFloat(productPrice),
+                salePrice:parseFloat(salePrice),
+                isWholesale,
+                saleTotalPrice:parseFloat(saleTotalPrice),
+                wholsaQty:parseInt(wholsaQty),
+                productStock:parseInt(productStock),
+                qty:parseInt(qty),
+                description, 
+                tags,
+                imageUrl,    
+                isActive,
+                productCode, }
+        });
+        return  NextResponse.json(updatedProduct);
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json({
+            message:"Failed to update Producto",
+            error
+        },{status:500});
     }
 
 }

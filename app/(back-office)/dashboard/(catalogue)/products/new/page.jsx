@@ -1,22 +1,14 @@
-import NewProductForm from '@/components/backoffice/NewProductForm'
-import { getData } from '@/lib/getData'
-import React from 'react'
+
+import React from 'react';
+import ProductForm from '@/components/backoffice/Forms/NewProductForm';
+import FormHeader from '@/components/backoffice/FormHeader';
+import { getData } from '@/lib/getData';
 
 export default async function NewProduct() {
-  //passing categories and suppliers
-  const usersData = await getData("users");
-  const supplierData = usersData.filter((user)=>user.role==='SUPPLIER');
 
   const categoriesData = await getData("categories");
-  //const supplierData = await getData("suppliers");
- 
-
-  const categories = categoriesData.map((category)=>{
-    return{
-      id:category.id,
-      title:category.title,
-    };
-  });
+  const usersData = await getData("users");
+  const supplierData = usersData.filter((user)=>user.role==='SUPPLIER');
   const suppliers = supplierData.map((supplier)=>{
     return{
       id:supplier.id,
@@ -24,12 +16,19 @@ export default async function NewProduct() {
 
     };
   });
-
-  //console.log(categoriesData);
+  const categories = categoriesData.map((category)=>{
+    return{
+      id:category.id,
+      title:category.title,
+    };
+  });
   //console.log(usersData);
   //console.log(categories);
   //console.log(suppliers);
   return (
-    <NewProductForm categories={categories} suppliers={suppliers}/>
+    <div>
+      <FormHeader title="New Product"/>
+      <ProductForm categories={categories} suppliers={suppliers} />
+    </div>
   )
 }

@@ -6,14 +6,7 @@ import ImageColumn from "@/components/data-table-components/DataTableColumns/Ima
 import DateColumn from "@/components/data-table-components/DataTableColumns/DateColumn";
 import ActionColumn from "@/components/data-table-components/DataTableColumns/ActionColumn";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 
 
 export const columns  = [
@@ -79,6 +72,7 @@ export const columns  = [
         return <ActionColumn
         row={row}
         title="banner"
+        editEndpoint={`banners/update/${banner.id}`}
         endpoint={`banners/${banner.id}`}
         />
       }

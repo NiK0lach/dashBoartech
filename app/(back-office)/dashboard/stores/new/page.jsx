@@ -1,8 +1,7 @@
-
-import NewStoreForm from '@/components/backoffice/NewStoreForm';
-import { getData } from '@/lib/getData'
-import React from 'react'
-
+import React from 'react';
+import { getData } from '@/lib/getData';
+import StoreForm from '@/components/backoffice/Forms/NewStoreForm';
+import FormHeader from '@/components/backoffice/FormHeader';
 
 export default async function NewStore() {
   const categoriesData = await getData("categories");
@@ -14,6 +13,9 @@ export default async function NewStore() {
   });
  
   return (
-    <NewStoreForm categories={categories} />
-  )
+    <div>
+      <FormHeader title="New Product"/>
+      <StoreForm categories={categories} />
+    </div>
+  );
 }

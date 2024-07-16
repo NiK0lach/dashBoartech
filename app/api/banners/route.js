@@ -11,14 +11,14 @@ export async function POST(request){
             }
                
         });
-        console.log(banners);
+        
         return  NextResponse.json(banners);
     } catch (error) {
         console.log(error);
         return NextResponse.json({
             message:"Failed to create Banner",
             error
-        },{status:500})
+        },{status:409})
     }
 
 }

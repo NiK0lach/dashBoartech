@@ -3,9 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request){
     try {
-        const { title, slug, categoryId, description, content, imageUrl, isActive 
-
-        } = await request.json();
+        const { title, slug, categoryId, description, content, imageUrl, isActive} = await request.json();
         const existingTraining= await db.training.findUnique({
             where:{
                 slug,
@@ -45,13 +43,13 @@ export async function POST(request){
 
 export async function GET(request){
     try {
-        const trainings = await db.training.findMany(
-            {
+        const trainings = await db.training.findMany({
+            
                 orderBy:{
                     createdAt:"desc",
-                }
-            }
-        );
+                },
+               
+            });
         return NextResponse.json(trainings);
       
     } catch (error) {

@@ -5,7 +5,8 @@ export async function POST(request){
 
 
     try {
-        const {slug,
+        const {
+            slug,
             title,
             sku, 
             barcode, 

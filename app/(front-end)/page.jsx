@@ -7,20 +7,24 @@ import Link from "next/link";
 
 
 export default async function Home() {
-  const categories= await getData('categories');
+  const categoriesData = await getData('categories');
+  const categories = await categoriesData.filter((category)=>{
+    return category.products.length > 3
+  });
+  //console.log(categories);
   return (
    <div className="min-h-screen">
     <Hero/>
     <StoreList/>
-    {categories.map((category, i) =>
-        {
-          return(
+
+    {categories.map((category, i) => {
+       return(
           <div key={i} className="py-8">
             <CategoryList category={category}/>
           </div> 
-          )
-        }
-      )}
+          );
+     })}
+
     <TrainingList/>
     <h2 className="text-4xl px-8 mt-8">Front end Webapp Gernik</h2>
     <Link className="my-4 underline px-8" href="/register-supplier">Registrate como Contratista </Link> 

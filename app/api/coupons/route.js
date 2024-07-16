@@ -20,7 +20,7 @@ export async function POST(request){
         return NextResponse.json({
             message:"Failed to create Coupon",
             error
-        },{status:500})
+        },{status:409})
     }
 
 }

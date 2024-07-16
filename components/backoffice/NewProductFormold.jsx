@@ -7,54 +7,21 @@ import { useForm } from 'react-hook-form';
 import TexAreaInput from '@/components/FormInputs/FormInputs/TextAreaInput';
 import ImageInput from '@/components/FormInputs/FormInputs/ImageInput';
 import SelectInput from '@/components/FormInputs/FormInputs/SelectInput';
-import { makePostRequest } from '@/lib/apiRequest';
+import { makePostRequest, makePutRequest } from '@/lib/apiRequest';
 import { generateSlug } from '@/lib/generateSlug';
 import ArrayItemsInput from '@/components/FormInputs/FormInputs/ArrayItemsInput';
 import ToggleInput from '@/components/FormInputs/FormInputs/ToggleInput';
 import { redirect, useRouter } from 'next/navigation';
 import { generateUserCode } from '@/lib/generateUserCode';
 
-export default function NewProductForm({categories,suppliers}) {
-
-  const [imageUrl,setImageUrl]=useState("");
-/*   const categories =[
-    {
-      id:1,
-      title:"Category 1"
-    },
-    {
-      id:2,
-      title:"Category 2"
-    },
-    {
-      id:3,
-      title:"Category 3"
-    },
-    {
-      id:4,
-      title:"Category 4"
-    },
-  ];
-  const suppliers =[
-    {
-      id:1,
-      title:"marca 1"
-    },
-    {
-      id:2,
-      title:"marca 2"
-    },
-    {
-      id:3,
-      title:"marca 3"
-    },
-    {
-      id:4,
-      title:"marca 4"
-    },
-  ]; */
+export default function NewProductForm({categories,suppliers,updateData={}}) {
+  console.log(updateData);
+  const initialImageUrl = updateData?.imageUrl ?? "";
+  const initialTags = updateData?.tags ?? [];
+  const id = updateData?.id ?? "";
   
-  const [tags, setTags]=useState([]);
+  const [imageUrl,setImageUrl]=useState(initialImageUrl);
+  const [tags, setTags]=useState(initialTags);
   const [loading,setLoading] =useState(false);
   const {
     register,
@@ -65,12 +32,12 @@ export default function NewProductForm({categories,suppliers}) {
   } = useForm({
       defaultValues: {
         isActive:false,
+        isWholesale:false,
+        ...updateData,
     },
   });
   const isActive = watch("isActive");
-  console.log(isActive);
   const isWholesale=watch("isWholesale")
-
   const router = useRouter();
   function redirect(){
     router.push('/dashboard/products');
@@ -78,22 +45,28 @@ export default function NewProductForm({categories,suppliers}) {
    
 
   async function onSubmit(data){
-   const slug=generateSlug(data.title);
-   const productCode=generateUserCode('ELG',data.title)
-      data.slug=slug;
-      data.imageUrl=imageUrl;
-      data.tags=tags;
-      data.qty=1;
-      data.productCode=productCode;
-      console.log(data);
-      makePostRequest(setLoading, "api/products", data, "Product", reset, redirect);
-      setImageUrl("");
-      setTags([]);
+      const slug=generateSlug(data.title);
+      const productCode=generateUserCode('ELG',data.title)
+          data.slug=slug;
+          data.imageUrl=imageUrl;
+          data.tags=tags;
+          data.qty=1;
+          data.productCode=productCode;
+          console.log(data);
+     
+      if(id) {
+        data.id = id;
+        makePutRequest(setLoading,`api/products/${id}`,data,"Product",redirect);
+        //console.log("update Request", data);
+    } else {
+        makePostRequest(setLoading, "api/products", data, "Product", reset, redirect);
+        setImageUrl("");
+        setTags([]);
+    }
+
   }   
   return (
-   <div>
-      <FormHeader title="New Product"/>
-      <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg
+    <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg
        shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3'>
        <div className='grid gap-4 sm:grid-cols-2 sm:gap-6'>
         <TextInput 
@@ -123,7 +96,7 @@ export default function NewProductForm({categories,suppliers}) {
            errors={errors}
            multiple={false}
            className='w-full'
-           options={categories}
+           options=""
          />
           <SelectInput 
            label="Select Marca"
@@ -131,7 +104,7 @@ export default function NewProductForm({categories,suppliers}) {
            register={register}
            errors={errors}
            multiple={false}
-           options={suppliers}
+           options=""
            className='w-full'
           />
           <TextInput 
@@ -215,10 +188,14 @@ export default function NewProductForm({categories,suppliers}) {
         </div>
          
 
-        <SubmitButton isLoading={loading} buttonTitle="Create Product" loadingButtonTitle="Creating Product please wait..." />
+        <SubmitButton 
+            isLoading={loading} 
+            buttonTitle={id ? "Update Producto" : "Create a new Producto"} 
+            loadingButtonTitle={`${id ? "Updating" : "Creating" } 
+                Producto please wait...`} 
+            />
       </form> 
-   </div>
-  )
+   
+  );
 }
-
 

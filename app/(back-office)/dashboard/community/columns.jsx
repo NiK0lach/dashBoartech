@@ -66,7 +66,8 @@ export const columns  = [
         const training = row.original;
         return <ActionColumn
         row={row}
-        title="training"
+        title="Training"
+        editEndpoint={`community/update/${training.id}`}
         endpoint={`training/${training.id}`}
         />
       }
