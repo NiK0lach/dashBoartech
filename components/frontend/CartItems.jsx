@@ -1,25 +1,28 @@
-import React from 'react'
+import React from 'react';
 import CartProducts from '@/components/frontend/CartProducts';
+import EmptyCart from './EmptyCart';
 
 
 export default function CartItems({ cartItems }) {
   return (
-    <div className="col-span-8 sm:col-span-full">
-           {/* heading */}
-              <h2 className='py-2 mb-6 text-2xl'>Your Cart</h2>
-              <div className="flex items-center justify-between border-b border-slate-400
-              text-slate-600 dark:text-slate-200 pb-3 font-semibold text-sm mb-4">
+    <div className="md:col-span-8 col-span-full">
+           {cartItems.length > 0 && (
+            <>
+                <h2 className='py-2 mb-6 text-2xl'>Your Cart</h2>
+                <div className="flex items-center justify-between border-b border-slate-400 text-slate-600 dark:text-slate-200 pb-3 font-semibold text-sm mb-4">
                 <h2 className="uppercase">Product</h2>
                 <h2 className="uppercase">Quantity</h2>
                 <h2 className="uppercase">Price</h2>
               </div>
-
+            </>
+            )}
               <div className='border-b'>
-                {cartItems.length>0 ? cartItems.map((item,i)=>{
-                  return  <CartProducts cartItem={item} key={i}/>
-                }):(<p> <CartProducts/></p>)}
+                {cartItems.length > 0 ? (cartItems.map((item, i) => {
+                  return <CartProducts cartItem={item} key={i} />
+                  }) ) : ( <EmptyCart /> )
+                }
               </div>
-              {/* CouponForm */}
+              
               <div className="flex items-center gap-2 py-4 px-3">
               <input 
                 type="text" 

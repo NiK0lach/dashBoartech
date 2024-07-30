@@ -1,6 +1,6 @@
-import React from 'react'
-import Link from 'next/link'
-import CategoryCarousel from './CategoryCarousel'
+import React from 'react';
+import Link from 'next/link';
+import CategoryCarousel from './CategoryCarousel';
 
 
 export default async function CategoryList({category}) {
@@ -18,6 +18,6 @@ export default async function CategoryList({category}) {
             <CategoryCarousel products={category.products}/>
        </div>
     </div>
-  )
+  );
 }
 

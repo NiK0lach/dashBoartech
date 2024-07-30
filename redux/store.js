@@ -1,5 +1,4 @@
 //create store
-
 import { configureStore } from "@reduxjs/toolkit";
 import cartSlice from "./slices/cartSlice";
 

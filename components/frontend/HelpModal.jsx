@@ -1,7 +1,7 @@
-"use client";
+"use client"
 import { useState } from "react";
 import {  Modal } from "flowbite-react";
-import { HelpCircle, HeadphonesIcon, Truck, CornerDownLeft, MessageSquare} from 'lucide-react'
+import { HelpCircle, HeadphonesIcon, Truck, CornerDownLeft, MessageSquare} from 'lucide-react';
 import Link from "next/link";
 
 

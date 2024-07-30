@@ -1,4 +1,3 @@
-
 import React from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
@@ -21,7 +20,7 @@ export default async function Hero() {
         <div className='col-span-2 hidden sm:block bg-gray-100 p-3 dark:bg-gray-800 rounded-lg space-y-6'>
             <Link href="#" className='flex items-center space-x-2'>
                 <CircleHelp className='shrink-0 w-5 h-5 text-slate-700 dark:text-lime-500'/>
-                <div className="flex flex-col ">
+                <div className="flex flex-col">
                     <h2 className='uppercase text-sm'>Help Center</h2>
                     <p className='text-[0.6rem]'>Guide to custumer care</p>
                 </div>

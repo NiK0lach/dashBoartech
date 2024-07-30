@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Logo from '../../public/assets/images/logo/img_logogernik0001_09.png';
 import Image from 'next/image';
 
@@ -88,5 +88,5 @@ export default function Footer() {
         </footer>
 
 
-  )
+  );
 }

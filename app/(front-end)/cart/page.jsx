@@ -8,6 +8,7 @@ import BreadCrumb from '@/components/frontend/BreadCrumb';
 //import CartProducts from '@/components/frontend/cartProducts';
 import CartItems from '@/components/frontend/CartItems';
 import CartSubTotalCard from '@/components/frontend/CartSubTotalCard';
+import EmptyCart from '@/components/frontend/EmptyCart';
 
 
 export default function Cart() {
@@ -19,11 +20,12 @@ export default function Cart() {
   return (
   <>
     <BreadCrumb/>
-    <div className="grid grid-cols-12 gap-8 px-8 py-3">
-         <CartItems cartItems={cartItems}/>
-         {/* Cart Total info */}
-         <CartSubTotalCard subTotal={subTotal}/>
-    </div>
- </>
+       {cartItems.length>0?(<div className="grid grid-cols-12 md:gap-8 gap-6 px-8 py-3">
+         <CartItems cartItems={cartItems} />
+         <CartSubTotalCard subTotal={subTotal} />)
+         </div>):(
+          <EmptyCart/>
+        )}
+   </>
   );
 }

@@ -1,8 +1,6 @@
-
 import React from 'react';
 import { User } from 'lucide-react';
 import SearchForm from './SearchForm';
-import { ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Logo from '../../public/assets/images/logo/img_logogernik-00_03.png';
