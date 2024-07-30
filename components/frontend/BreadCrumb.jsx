@@ -8,7 +8,7 @@ export default function BreadCrumb() {
 <nav className="flex mb-8" aria-label="Breadcrumb">
   <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
     <li className="inline-flex items-center">
-      <a href="#" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+      <a href="/" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
         <HomeIcon className='rtl:rotate-180 w-3 h-3 text-gray-400 mx-1'/>
         Home
       </a>
@@ -18,7 +18,7 @@ export default function BreadCrumb() {
       <div className="flex items-center">
       <ChevronRight className='rtl:rotate-180 w-3 h-3 text-gray-400 mx-1'/>
         <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
-        Flowbite</span>
+        <a href='#'>Products</a></span>
       </div>
     </li>
   </ol>
