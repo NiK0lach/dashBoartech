@@ -1,6 +1,10 @@
-import db from "@/lib/db"
-import { NextResponse } from "next/server"
+import db from "@/lib/db";
+import { NextResponse } from "next/server";
 import bcrypt from 'bcrypt';
+import { v4 as uuidv4 } from "uuid";
+import base64url from "base64url";
+import { Resend } from "resend";
+import { EmailTemplate } from '@/components/email-template';
 
 export async function POST(request){
     try {
@@ -43,7 +47,7 @@ export async function POST(request){
             return NextResponse.json(
             { 
                 error,
-                message:"Opps Server error algo paso!",     
+                message:"Server Error: Opps algo paso!",     
             },
             { status:500 }
         );

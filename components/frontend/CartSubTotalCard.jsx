@@ -2,9 +2,12 @@ import React from 'react'
 import Link from 'next/link';
 
 export default function CartSubTotalCard({subTotal}) {
-  const shipping = 35000;
-  const tax = 19;
-  const totalPrice = subTotal + shipping + tax;
+
+  const shipping = 35.000;
+  const tax = subTotal * 1.21;
+  console.log(subTotal);
+  console.log(tax);
+  const totalPrice = Number(subTotal) + Number(shipping) + Number(tax);
   return (
     <div className="md:col-span-4 col-span-full sm:block  bg-white border border-gray-300 dark:border-gray-700 rounded-lg dark:bg-gray-800 text-slate-800 overflow-hidden p-5">
               <span className='text-3xl dark:text-slate-100'>Card Total</span>
