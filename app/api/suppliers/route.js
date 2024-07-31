@@ -21,6 +21,28 @@ export async function POST(request){
         } = await request.json();*/
         const supplierData = await request.json();
         //console.log(supplierData);
+        //check if farmer exists in db
+        const existingUser= await db.user.findUnique({
+            where: {
+                id:supplierData.userId,
+            },
+          });
+        if(!existingUser){
+            return NextResponse.json({
+                data:null,
+                message:`Usuario no existe!`,
+            },{status:404}
+           );
+          }
+          //update emailVerified
+        const updatedUser = await db.user.update({
+            where:{
+                id:supplierData.userId,
+            },
+            data: {
+                emailVerified:true,
+            },
+        });
         const newSupplierProfile = await db.SupplierProfile.create({
             data:{
                 name:supplierData.name,   

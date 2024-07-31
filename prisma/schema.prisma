@@ -135,18 +135,31 @@ model User {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
   email         String?   @unique
-  emailVerified DateTime?
+  emailVerified Boolean @default(false)
   password      String
  
   products Product[]
 
   role          UserRole @default(USER)
-  
-  supplierProfile SupplierProfile?
+  verificationToken  String?
+  profile            UserProfile?
+  supplierProfile    SupplierProfile?
 
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
+
+model UserProfile {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @unique @db.ObjectId
+  // Add other fields for user onboarding information
+  // For example:
+  dateOfBirth DateTime?
+  address    String?
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 
 model SupplierProfile {
     id       String    @id @default(auto()) @map("_id") @db.ObjectId

@@ -32,7 +32,7 @@ export default function NewSupplierForm( { user } ) {
   console.log(isActive);
   const router = useRouter();
   function redirect(){
-  router.push('/dashboard/suppliers');
+  router.push('/login');
   }
    
   async function onSubmit(data){
