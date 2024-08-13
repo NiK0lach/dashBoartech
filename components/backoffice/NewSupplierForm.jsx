@@ -142,7 +142,7 @@ export default function NewSupplierForm( { user } ) {
           errors={errors}
           isRequired={false}
           />
-          {/* Toggle component */}
+         
           <ToggleInput
             label="Publica Supplier"
             name="isActive"
@@ -157,5 +157,5 @@ export default function NewSupplierForm( { user } ) {
     
     </div>
     
-  )
+  );
 }

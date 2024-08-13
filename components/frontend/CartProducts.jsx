@@ -22,15 +22,9 @@ export default function CartProducts( { cartItem } ) {
   return (
     <div className='flex items-center justify-between text-slate-600 dark:text-slate-200 pb-3 font-semibold text-sm'>
         <div className="flex items-center gap-3">
-        <Image 
-            src={cartItem.imageUrl}
-            alt={cartItem.title}
-            width={249}
-            height={249}
-            className='rounded-xl w-20 h-20'
-        />
+        <Image src={cartItem.imageUrl} alt={cartItem.title} className='rounded-xl w-20 h-20' width={249} height={249} />
             <div className="flex flex-col">
-            <h2>{cartItem.title}</h2>
+               <h2>{cartItem.title}</h2>
             </div>
         </div>
         <div className='flex gap-3 items-center rounded-xl border border-gray-400'>
@@ -44,10 +38,10 @@ export default function CartProducts( { cartItem } ) {
             
         </div>
         <div className='flex items-center gap-2'>
-        <h4 className='text-2xl px-4'>${cartItem.salePrice} <small>col</small></h4>
-        <button onClick={()=>handleCartItemDelete(cartItem.id)}>
-            <Trash2 className='dark:text-red-600 h-5 w-5 hover:text-white dark:hover:text-white'/>
-        </button>
+            <h4 className='text-2xl px-4'>${cartItem.salePrice} <small>col</small></h4>
+            <button onClick={()=>handleCartItemDelete(cartItem.id)}>
+                <Trash2 className='dark:text-red-600 h-5 w-5 hover:text-white dark:hover:text-white'/>
+            </button>
         </div>
     </div>
   );

@@ -4,6 +4,8 @@ import StoreList from "@/components/frontend/StoreList";
 import { getData } from "@/lib/getData";
 import TrainingList from "@/components/frontend/TrainingList";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOptions";
 
 
 export default async function Home() {
@@ -11,7 +13,9 @@ export default async function Home() {
   const categories = await categoriesData.filter((category)=>{
     return category.products.length > 3
   });
-  //console.log(categories);
+
+  const session = await getServerSession(authOptions);
+  console.log(session?.user);  //console.log(categories);
   return (
    <div className="min-h-screen">
     <Hero/>

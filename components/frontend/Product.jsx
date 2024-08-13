@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 export default function Product({product}) {
     const dispatch = useDispatch();
     function handleAddToCart(){
-       //Triiger dispatch the reducer 
+       //Trigger dispatch the reducer 
        dispatch(addToCart(product));
        toast.success("items added Sucessfully");
     }
@@ -33,7 +33,7 @@ export default function Product({product}) {
                 <small className="text-xs"> col</small></p>
             <button onClick={()=> handleAddToCart()} className='flex items-center space-x-2 bg-lime-500
             dark:bg-lime-800 text-slate-50
-                text-sm rounded-lg p-1 hover:bg-lime-800 duration-300 transition-all dark:hover:bg-lime-400 '>
+                text-sm rounded-lg p-1 hover:bg-lime-800 duration-300 transition-all dark:hover:bg-lime-400'>
             <BaggageClaimIcon className=''/>
             <span>Add</span>
             </button>

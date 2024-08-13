@@ -11,12 +11,12 @@ export async function POST(request){
        const resend = new Resend(process.env.RESEND_API_KEY);  
       //extract credetendials
       const { name, email, password, role} = await request.json();
-      //check if usera lready exits
+      //check if user already exits
       const existingUser= await db.user.findUnique({
         where: {
             email,
         },
-      });
+      })
       if(existingUser){
         return NextResponse.json({
             data:null,
@@ -41,18 +41,18 @@ export async function POST(request){
         },
       });
       console.log(newUser);
-      //send the email if user role is == supplier
+      //send the email if user role is == Supplier
       if(role==="SUPPLIER"){
         //Send an Email with the Token on the link as a search param
         const userId = newUser.id;
         const linkText = "Verify Account";
         const redirectUrl = `onboarding/${userId}?token=${token}`;
         const sendMail = await resend.emails.send({
-            from: "Sparkemove <response@sparemove.com>",
+            from: "Sparkemove <response@sparkemove.com>",
             to: email,
             subject: "Account Verification from Sparkemove",
             react: EmailTemplate({ name, redirectUrl, linkText }),
-            });
+        });
         console.log(sendMail);
         
       }
@@ -61,8 +61,7 @@ export async function POST(request){
         {
         data: newUser,
         message: "Usuario creado!",
-        
-       },
+        },
        {status:201}
    );
      } catch (error) {

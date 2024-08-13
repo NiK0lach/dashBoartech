@@ -17,8 +17,7 @@ export default function VerifyEmail() {
         <div className="mt-2 mb-4 text-sm">
           Thank you for creating an account with us. We have sent you an email, check your inbox and click on the link to complete your onboarding process.
         </div>
-        
-      </div>
+       </div>
     </div>
   );
 }
