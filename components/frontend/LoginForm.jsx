@@ -90,10 +90,7 @@ export default function LoginForm() {
         )}
       </div>
       <div className="flex gap-4 items-center">
-        <Link
-          href="/forgot-password"
-          className="shrink-0 font-medium text-blue-600 hover:underline dark:text-blue-500"
-        >
+        <Link href="/forgot-password" className="shrink-0 font-medium text-blue-600 hover:underline dark:text-blue-500">
           Forgot Password
         </Link>
         {loading ? (
