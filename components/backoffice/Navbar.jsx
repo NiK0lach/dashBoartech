@@ -85,7 +85,7 @@ return (
                   <DropdownMenuSeparator />
                 </DropdownMenuContent>
           </DropdownMenu>
-              <UserAvatar user={session?.user} />
+              {status==="authenticated" && <UserAvatar user={session?.user} />}
       </div>    
     </div>
   );

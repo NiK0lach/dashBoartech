@@ -34,7 +34,7 @@ export default function Navbar() {
                     <User />
                     <span>Login</span>
                   </Link>
-                  ):( <UserAvatar user={session?.user} /> )}
+                  ):( status==="authenticated" && <UserAvatar user={session?.user} /> )}
 
                   <HelpModal />
                   <CartCount/>

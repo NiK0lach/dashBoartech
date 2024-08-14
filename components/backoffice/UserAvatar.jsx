@@ -15,7 +15,7 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { generateInitials } from "@/lib/generateinitials";
 
-export default function UserAvatar({ user }) {
+export default function UserAvatar({ user={} }) {
   const {name, image} = user;
   const router = useRouter();
   const initials = generateInitials(name);
@@ -36,7 +36,7 @@ export default function UserAvatar({ user }) {
             alt="User Profile"
             className="w-8 h-8 rounded-full"
           />:(
-            <div className="flex items-center w-10 h-10 p-4 rounded-full border dark:border-slate-500 font-medium text-slate-800 dark:text-slate-100 bg-slate-200 dark:bg-slate-600 shadow-md">{initials}</div>
+            <div className="flex items-center w-10 h-10 p-2 rounded-full border dark:border-slate-500 font-medium text-slate-800 dark:text-slate-100 bg-slate-200 dark:bg-slate-600 shadow-md">{initials}</div>
           )}
         </button> 
       </DropdownMenuTrigger>
@@ -50,10 +50,10 @@ export default function UserAvatar({ user }) {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <button className="flex items-center space-x-2">
+          <Link href="/dashboard/profile" className="flex items-center space-x-2">
             <Settings className="mr-2 h-4 w-4" />
             <span>Edit Profile</span>
-          </button>
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <button onClick={handleLogout} className="flex items-center space-x-2">
