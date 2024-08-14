@@ -6,22 +6,22 @@ import logo from '../../public/assets/images/logo/img_logogernik-00_03.png';
 import { BoxIcon, ChevronDown, ChevronRight, CircleDollarSign, GitCommitHorizontal, LayoutGrid, LogOut, PanelsTopLeft, Settings, Slack, Store, Truck, User2, UserSquare, Warehouse} from 'lucide-react';
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
 import { usePathname } from 'next/navigation';
-import { useSession } from 'next-auth/react';
-//import { useRouter } from 'next/navigation'; 
+import { useSession, signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+
+
 
 export default function Sidebar({showSidebar,setShowSidebar}) {
   const [openMenu,setOpenMenu]=useState(false);
+  const router = useRouter();
   const {data: session, status} = useSession();
   const pathname= usePathname();
-  //const router = useRouter();
+  
     if(status ==="loading"){
       return <p>Loading...</p>
     }
   const role = session?.user?.role;
-    //async function handleLogout(){
-     // await signOut();
-      //router.push("/");
-    //} 
+   
     let sidebarLinks =[
       {
         title:"Custumers",
@@ -143,7 +143,11 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
       ];
       catalogueLinks=[];
     }
-
+  
+    async function handleLogout(){
+       await signOut();
+       router.push("/");
+    }
 
   return (
     <div className={showSidebar?"sm:block mt-20 sm:mt-0 bg-white dark:bg-slate-700 space-y-6 w-64 h-screen text-slate-800 dark:text-slate-50 fixed left-0 top-0 z-50 shadow-md overflow-y-scroll"
@@ -158,7 +162,7 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
           <span>DashBoard</span>
         </Link>
         {catalogueLinks.length > 0 && (
-              <Collapsible className='px-6 py-2'>
+          <Collapsible className='px-6 py-2'>
               <CollapsibleTrigger className='' onClick={() => setOpenMenu(!openMenu)}>
                   <button className='flex items-center space-x-6 py-2'>
                     <div className="flex items-center space-x-3">
@@ -167,26 +171,23 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
                     </div>
                   {openMenu? <ChevronDown/>: <ChevronRight/>}
                   </button>
-                </CollapsibleTrigger>
-                  
-                  <CollapsibleContent className='rounded-lg py-3 px-3 pl-6 bg-slate-50 dark:bg-slate-800'>
-                    {
-                      catalogueLinks.map((item,i)=>{
+              </CollapsibleTrigger>   
+              <CollapsibleContent className='rounded-lg py-3 px-3 pl-6 bg-slate-50 dark:bg-slate-800'>
+                {
+                  catalogueLinks.map((item,i)=>{
                         const Icon =item.icon;
                         return(
-                        
-                            <Link onClick={() => setShowSidebar(false)} key={i} href={item.href} className={ pathname === item.href 
+                          <Link onClick={() => setShowSidebar(false)} key={i} href={item.href} className={ pathname === item.href 
                                 ? "flex items-center space-x-3 py-1 text-md border-green-600 text-green-600" 
                                 : "flex items-center space-x-3 py-1 text-sm" 
                                 }>
                               <Icon/>
                               <span>{item.title}</span>
-                            </Link>
-                          
-                        );
-                      })
-                    }
-                  </CollapsibleContent>
+                           </Link>
+                             );
+                    })
+                  }
+               </CollapsibleContent>
               </Collapsible>   
         )}
        
@@ -203,7 +204,7 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
           })
         }
         <div className='px-6 py-4'>
-        <button className='flex items-center space-x-3 px-6 py-3  rounded-md bg-green-600'>
+        <button onClick={handleLogout} className='flex items-center space-x-3 px-6 py-3  rounded-md bg-green-600'>
           <LogOut/><span>Logout</span>
         </button>
         </div>

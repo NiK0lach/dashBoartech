@@ -8,11 +8,11 @@ import Logo from '../../public/assets/images/logo/img_logogernik-00_03.png';
 import ThemeSwitcherBtn from '../ThemeSwitcherBtn';
 import HelpModal from './HelpModal';
 import CartCount from './CartCount';
-import UserAvatar from '../backoffice/userAvatar';
+import UserAvatar from '../backoffice/UserAvatar';
 import { useSession } from 'next-auth/react';
 
 export default function Navbar() {
-  const { data: session, status } = useSession();
+  const {data:session,status}=useSession();
    if(status === "Loading"){
      return <p>Loading...</p>
    }
@@ -34,12 +34,11 @@ export default function Navbar() {
                     <User />
                     <span>Login</span>
                   </Link>
-                  ):( <UserAvatar user={session?.user} />  )}
+                  ):( <UserAvatar user={session?.user} /> )}
 
                   <HelpModal />
                   <CartCount/>
-                  
-               </div>
+                </div>
                <ThemeSwitcherBtn/>
         </div>
     </div>

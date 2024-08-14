@@ -47,11 +47,13 @@ export async function POST(request){
         const userId = newUser.id;
         const linkText = "Verify Account";
         const redirectUrl = `onboarding/${userId}?token=${token}`;
+        const description = "Click on the following link in order to reset your password. Thank you";
+        const subject = "Account Verification from Sparkemove";
         const sendMail = await resend.emails.send({
             from: "Sparkemove <response@sparkemove.com>",
             to: email,
-            subject: "Account Verification from Sparkemove",
-            react: EmailTemplate({ name, redirectUrl, linkText }),
+            subject: subject,
+            react: EmailTemplate({ name, redirectUrl, linkText, description, subject }),
         });
         console.log(sendMail);
         

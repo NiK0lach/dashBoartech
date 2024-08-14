@@ -8,11 +8,13 @@ export const EmailTemplate = ({
   name = "",
   redirectUrl = "/login",
   linkText,
+  description,
+  subject
 }) => (
   <Html>
     <Head />
     <Preview>
-      A fine-grained personal access token has been added to your account
+      {subject}
     </Preview>
     <Body style={main}>
       <Container style={container}>
@@ -30,9 +32,7 @@ export const EmailTemplate = ({
             Hey <strong>{name}</strong>!
           </Text>
           <Text style={text}>
-            Thank you, for Creating annAccount with Us. We request you to click
-            on the link Below in order to complete your onboarding process
-            Account. Thankyou
+          {description}
           </Text>
 
           <Link style={button} href={`${baseUrl}/${redirectUrl}`}>
