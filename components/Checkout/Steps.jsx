@@ -14,7 +14,7 @@ return (
                 <div className="-m-1">
                   <Link href="/cart" title="" className="inline-flex items-center p-1 text-sm md:text-base font-medium rounded-md
                    text-slate-500 hover:text-lime-700
-                   dark:text-lime-500 dark:hover:text-lime-100 focus:ring-2 focus:outline-none focus:text-gray-900 focus:ring-gray-900">
+                   dark:text-lime-500 dark:hover:text-lime-100">
                     Cart
                     <span className="inline-flex items-center justify-center w-5 h-5 ml-2
                      text-xs font-bold bg-lime-600 rounded-full text-white">
