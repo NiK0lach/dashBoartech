@@ -8,8 +8,8 @@ export async function GET(request,{params:{id}}){
             where:{
                 id,
               },
-              
             });
+         
         return NextResponse.json(product);
       
     } catch (error) {

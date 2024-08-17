@@ -9,7 +9,8 @@ import Link from 'next/link';
 
 
 export default async function ProductDetailPage({params:{slug}}) {
-    const product= await getData(`products/product/${slug}`);
+    const product= await getData(`/products/product/${slug}`);
+    
   return (
     <div>
         <BreadCrumb/> 
@@ -34,7 +35,7 @@ export default async function ProductDetailPage({params:{slug}}) {
                 <div className='flex items-centern justify-between mb-4'>
                     <p className='pt-4 text-sm font-light'><span className='font-bold'>SKU:</span>{product.sku}</p>
                     <p className='bg-lime-600 px-4 py-2 rounded-full text-slate-900 font-ligth '>
-                        <span className='font-bold'>Stock</span>: {product.qty}</p>
+                        <span className='font-bold'>Stock</span>: {product.productStock}</p>
                 </div>
             </div>
             
@@ -130,7 +131,7 @@ export default async function ProductDetailPage({params:{slug}}) {
         py-3 h-96 px-8 rounded-lg mt-6">
             <h2 className='text-xl font-semibold mb-4 py-6 px-5 bg-slate-50 dark:bg-slate-800 dark:border-gray-900 rounded-lg'>Related products</h2>
             <div className='scale-75 origin-top-left my-5 rounded-xl'>
-            <CategoryCarousel products={category.products} className=""/> 
+            
            </div>
        </div>
     </div>

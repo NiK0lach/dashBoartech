@@ -2,7 +2,7 @@ import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 
-export async function GET(request,{params:{id}}){
+export async function GET(request,{params:{slug}}){
     try {
         const product = await db.product.findUnique({
             where:{
@@ -24,11 +24,11 @@ export async function GET(request,{params:{id}}){
 
 }
 
-export async function DELETE(request,{params:{id}}){
+/* export async function DELETE(request,{params:{id}}){
     try {
         const existingProduct = await db.product.findUnique({
             where:{
-              id,
+              slug,
             },
         });
         if(!existingProduct){
@@ -40,7 +40,7 @@ export async function DELETE(request,{params:{id}}){
         }
         const deletedProduct= await db.product.delete({
             where:{
-                id,
+                slug,
               }, 
         });
         return NextResponse.json(deletedProduct);
@@ -132,4 +132,4 @@ export async function PUT(request,{params:{id}}){
         },{status:500});
     }
 
-}
+} */

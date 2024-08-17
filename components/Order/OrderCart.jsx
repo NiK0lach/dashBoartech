@@ -1,5 +1,7 @@
 import React from 'react'
 import { convertIsoDateToNormal } from '@/lib/convertIsoDateToNormal'
+import { generateSlug } from '@/lib/generateSlug';
+import Link from 'next/link';
 
 
 export default function OrderCart({order}) {
@@ -50,6 +52,7 @@ export default function OrderCart({order}) {
                             <ul className="space-y-7">
                                 {
                                     order.orderItems.length>0?order.orderItems.map((item,i)=>{
+                                        const slug = generateSlug(item.title);
                                          return (
                                             <li  key={i} className="relative flex pb-10 sm:pb-0">
                                                 <div className="flex-shrink-0">
@@ -71,8 +74,8 @@ export default function OrderCart({order}) {
 
                                                     <div className="absolute bottom-0 left-0 sm:relative">
                                                         <div className="flex space-x-5">
-                                                            <a href="#" title="" className="p-1 -m-1 text-sm font-medium text-gray-500 transition-all duration-200 rounded hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
-                                                               {" "}  View Product {" "}  </a>
+                                                            <Link href={`/products/${slug}`} title={item.title} className="p-1 -m-1 text-sm font-medium text-gray-500 transition-all duration-200 rounded hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
+                                                               {" "}  View Product {" "}  </Link>
 
                                                             <span className="text-gray-200"> | </span>
 
