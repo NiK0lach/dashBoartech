@@ -100,12 +100,11 @@ export default function OrderCart({order}) {
                                     View Order
                                 </button>
 
-                                <button
-                                    type="button"
-                                    className="inline-flex items-center justify-center px-4 py-2.5 text-sm font-bold text-gray-900 transition-all duration-200 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 hover:bg-gray-100"
+                                <Link
+                                    href={`orders/${order.id}/invoice`} className="inline-flex items-center justify-center px-4 py-2.5 text-sm font-bold text-gray-900 transition-all duration-200 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 hover:bg-gray-100"
                                 >
                                     View Invoice
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>
