@@ -210,6 +210,7 @@ model Order {
   country        String
   zipCode        String
   shippingCost   Float
+  orderNumber String?
   // Payment method
   paymentMethod  String
 
@@ -228,6 +229,8 @@ model OrderItem {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   orderId     String    @db.ObjectId
   productId   String    @db.ObjectId
+  imageUrl    String?
+  title       String?
   quantity    Int
   price       Float
   createdAt   DateTime  @default(now())

@@ -42,11 +42,11 @@ export default function OrderSummaryForm() {
           },
           body: JSON.stringify(data),
         });
-    
+    const responseData = await response.json();
         if (response.ok) {
           setLoading(false);
           toast.success("Order Created Successfully");
-          router.push("/order-confirmation")
+          router.push(`/order-confirmation/${responseData.id}`)
         } else {
            setLoading(false);
            toast.error("Something Went wrong");

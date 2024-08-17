@@ -9,18 +9,16 @@ import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-
-
 export default function Sidebar({showSidebar,setShowSidebar}) {
-  const [openMenu,setOpenMenu]=useState(false);
-  const router = useRouter();
-  const {data: session, status} = useSession();
-  const pathname= usePathname();
+    const [openMenu,setOpenMenu]=useState(false);
+    const router = useRouter();
+    const {data: session, status} = useSession();
+    const pathname= usePathname();
   
     if(status ==="loading"){
       return <p>Loading...</p>
     }
-  const role = session?.user?.role;
+    const role = session?.user?.role;
    
     let sidebarLinks =[
       {
@@ -49,6 +47,11 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
         href:"/dashboard/orders"
       },
       {
+        title:"Sales",
+        icon:Truck,
+        href:"/dashboard/sales"
+      },
+      {
         title:"Staff",
         icon:UserSquare,
         href:"/dashboard/staff"
@@ -57,6 +60,11 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
         title:"Wallet",
         icon:CircleDollarSign,
         href:"/dashboard/wallet"
+      },
+      {
+        title:"Supplier Support",
+        icon:CircleDollarSign,
+        href:"/dashboard/support"
       },
       {
         title:"Settings",
@@ -106,10 +114,20 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
           icon:Truck,
           href:"/dashboard/orders"
         },
+        {
+          title:"Sales",
+          icon:Truck,
+          href:"/dashboard/sales"
+        },
        {
           title:"Wallet",
           icon:CircleDollarSign,
           href:"/dashboard/wallet"
+        },
+        {
+          title:"Supplier Support",
+          icon:CircleDollarSign,
+          href:"/dashboard/support"
         },
         {
           title:"Settings",
@@ -157,7 +175,7 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
       </Link>
       <div className='space-y-3 flex flex-col '>
 
-        <Link onClick={() => setShowSidebar(false)} href="/dashboard" className={ pathname === "/dashboard" ? "flex items-center space-x-3 px-6 py-4 border-l-8 border-green-600 text-green-600" : "flex items-center space-x-3 px-6 py-4" }>
+        <Link onClick={() => setShowSidebar(false)} href="/dashboard" className={ pathname === "/dashboard" ? "flex items-center space-x-3 px-6 py-4 border-l-8 border-lime-500 text-lime-500" : "flex items-center space-x-3 px-6 py-4" }>
           <LayoutGrid/>
           <span>DashBoard</span>
         </Link>
@@ -178,7 +196,7 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
                         const Icon =item.icon;
                         return(
                           <Link onClick={() => setShowSidebar(false)} key={i} href={item.href} className={ pathname === item.href 
-                                ? "flex items-center space-x-3 py-1 text-md border-green-600 text-green-600" 
+                                ? "flex items-center space-x-3 py-1 text-md border-green-400 text-green-500" 
                                 : "flex items-center space-x-3 py-1 text-sm" 
                                 }>
                               <Icon/>
@@ -196,7 +214,7 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
             const Icon =item.icon;
            // const pathname=item.href;
               return(
-                <Link onClick={() => setShowSidebar(false)} key={i} href={item.href} className={item.href == pathname ? 'flex items-center space-x-3 px-6 py-4 border-l-4 border-green-600 text-green-600':'flex items-center space-x-3 px-6 py-4'}>
+                <Link onClick={() => setShowSidebar(false)} key={i} href={item.href} className={item.href == pathname ? 'flex items-center space-x-3 px-6 py-4 border-l-4 border-lime-400 text-lime-500':'flex items-center space-x-3 px-6 py-4'}>
                   <Icon/>
                   <span>{item.title}</span>
                 </Link>
@@ -204,7 +222,7 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
           })
         }
         <div className='px-6 py-4'>
-        <button onClick={handleLogout} className='flex items-center space-x-3 px-6 py-3  rounded-md bg-green-600'>
+        <button onClick={handleLogout} className='flex items-center space-x-3 px-6 py-3  rounded-md bg-lime-700'>
           <LogOut/><span>Logout</span>
         </button>
         </div>

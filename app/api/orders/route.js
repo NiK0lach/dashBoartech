@@ -5,7 +5,18 @@ export async function POST(request){
     try {
         const {checkoutFormData, orderItems} = await request.json();
         const {city,country,email,firstName,lastName,paymentMethod,phone,shippingCost,streetAddress,userId,zipCode} = checkoutFormData;
-        
+         //Create OrderNumber
+         function generateOrderNumber(length) {
+            const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let orderNumber = '';
+          
+            for (let i = 0; i < length; i++) {
+              const randomIndex = Math.floor(Math.random() * characters.length);
+              orderNumber += characters.charAt(randomIndex);
+            }
+          
+            return orderNumber;
+          }
         
        const newOrder =  await db.order.create({ 
             data:{
@@ -19,9 +30,12 @@ export async function POST(request){
                 country,       
                 zipCode,       
                 shippingCost:parseFloat(shippingCost),   
-                paymentMethod, 
+                paymentMethod,
+                orderNumber:generateOrderNumber(8), 
           },
         });
+
+       
 
        //Create order Item
         const newOrderItems = await prisma.orderItem.createMany({
@@ -30,21 +44,21 @@ export async function POST(request){
                 quantity:parseInt(item.qty),
                 price:parseFloat(item.salePrice),
                 orderId:newOrder.id,
+                imageUrl:item.imageUrl,
+                title:item.title,
+                
             })),
         });
 
         console.log(newOrder,newOrderItems);
-
-       
-
         return  NextResponse.json(newOrder);
-        } catch (error) {
-            console.log(error);
-            return NextResponse.json({
-                message:"Failed to create Order",
-                error
-            },{status:500})
-        }
+            } catch (error) {
+                console.log(error);
+                return NextResponse.json({
+                    message:"Failed to create Order",
+                    error
+                },{status:500})
+            }
 
 }
 
@@ -56,6 +70,9 @@ export async function GET(request){
             
                 orderBy:{
                     createdAt:"desc",
+                },
+                include:{
+                    orderItems:true,
                 },
                
             });
