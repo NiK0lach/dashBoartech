@@ -1,8 +1,8 @@
+import React from "react";
 import { getData } from "@/lib/getData";
-import { Item } from "@radix-ui/react-dropdown-menu";
 import { CheckCircle2 } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+
 
 export default async function page({ params: { id } }) {
   const order = await getData(`orders/${id}`);
@@ -61,12 +61,7 @@ export default async function page({ params: { id } }) {
                       <p className="mt-6 text-sm font-medium text-gray-600 dark:text-gray-300">
                         {order.paymentMethod}
                       </p>
-                      {/* <p className="mt-1 text-sm font-medium text-gray-600">
-                        VISA
-                        <br />
-                        **** 4660
-                      </p> */}
-                    </div>
+                     </div>
                   </div>
                 </div>
 
@@ -85,6 +80,7 @@ export default async function page({ params: { id } }) {
                               className="flex items-start justify-between space-x-5 py-7 md:items-stretch"
                             >
                               <div className="flex items-stretch">
+                                <p className="p-5 text-xs text-slate-400">{item.quantity} |</p>
                                 <div className="flex-shrink-0">
                                   <Image
                                     width={200}
@@ -94,10 +90,13 @@ export default async function page({ params: { id } }) {
                                     alt={item.title}
                                   />
                                 </div>
-
+                              
                                 <div className="flex flex-col justify-between ml-5 w-44">
-                                  <p className="flex-1 text-sm font-bold text-gray-900 dark:text-gray-300">
+                                  <p className="flex-1 text-md font-bold text-gray-900 dark:text-gray-300">
                                     {item.title}
+                                  </p>
+                                  <p className="flex-1 text-sm font-bold text-gray-900 dark:text-gray-300">
+                                    {item.description}
                                   </p>
                                  </div>
                               </div>

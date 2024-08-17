@@ -9,40 +9,39 @@ import Link from 'next/link';
 
 
 export default async function ProductDetailPage({params:{slug}}) {
-    const category= await getData('/categories/66906817973bcb0869e99eca');
+    const product= await getData(`products/product/${slug}`);
   return (
     <div>
         <BreadCrumb/> 
        <div className="grid grid-cols-12 gap-8">
           <div className='col-span-3'>
-           <Image src='/assets/images/banner/bn-0Post 4_1.jpg'
-            alt=''
+           <Image src={product.imageUrl}
+            alt={product.title}
             width={500}
             height={600}
             className='w-full object-cover' />
         </div>
         <div className='col-span-6'>
             <div className='flex items-center justify-between'>
-                <h2 className='text-xl lg:text-3xl font-semibold'>Baterias de lithio</h2>
+                <h2 className='text-xl lg:text-3xl font-semibold'>{product.title}</h2>
                 <button>
                     <Share2/>
                 </button>
             </div>
             
             <div className='border-b border-gray-700 pb-3'>
-            <p className='py-2 '>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                 Perspiciatis nostrum voluptatibus aliquam necessitatibus id.</p>
+            <p className='py-2 '>{product.description}</p>
                 <div className='flex items-centern justify-between mb-4'>
-                    <p className='pt-4 text-sm font-light'><span className='font-bold'>SKU:</span> 36546434</p>
+                    <p className='pt-4 text-sm font-light'><span className='font-bold'>SKU:</span>{product.sku}</p>
                     <p className='bg-lime-600 px-4 py-2 rounded-full text-slate-900 font-ligth '>
-                        <span className='font-bold'>Stock</span>: 10</p>
+                        <span className='font-bold'>Stock</span>: {product.qty}</p>
                 </div>
             </div>
             
             <div className="flex items-center gap-4 pt-4 pb-6  justify-between border-b border-gray-700">
                 <div className="flex items-center gap-4">
-                    <h4 className='pt-3 text-2xl'>$120.0000 co</h4>
-                    <del className='text-slate-400 text-sm'>$110.000 co</del>
+                    <h4 className='pt-3 text-2xl'>${product.salePrice} co</h4>
+                    <del className='text-slate-400 text-sm'>${product.productPrice} co</del>
                 </div>
                 
                 <p className='flex items-center font-extralight'>

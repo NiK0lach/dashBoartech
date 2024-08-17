@@ -26,11 +26,11 @@ import { useDispatch, useSelector } from 'react-redux';
         const initialpaymentMethod = existingFormData.paymentMethod || "";
 
         const[paymentMethod,setPaymentMethod] =  useState(initialpaymentMethod); 
-        console.log(paymentMethod);    
+        //console.log(paymentMethod);    
 
         async function processData(data) {
           data.paymentMethod = paymentMethod;
-            console.log(data);
+            //console.log(data);
             //update thwe check oput data
             dispatch(updateCheckoutFormData(data));
             //update the current state

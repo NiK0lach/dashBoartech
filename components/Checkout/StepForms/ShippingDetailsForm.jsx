@@ -27,7 +27,7 @@ import { setCurrentStep, updateCheckoutFormData } from '@/redux/slices/checkoutS
         const initialShippinCost = existingFormData.shippingCost || "";
 
         const[shippingCost,setShippingCost] =  useState(initialShippinCost); 
-        console.log(shippingCost);    
+        //console.log(shippingCost);    
 
         async function processData(data) {
           data.shippingCost = shippingCost;

@@ -11,19 +11,17 @@ export async function GET(request,{params:{id}}){
               include:{
                 orderItems:true,
             },
-            
-              
-            });
+         });
         return NextResponse.json(order);
       
-    } catch (error) {
-        console.log(error);
-        return NextResponse.json(
-         {
-            message:"Failed to fetch order",
-            error,
-        },
-        { status:500 }
+        } catch (error) {
+            console.log(error);
+            return NextResponse.json(
+            {
+                message:"Failed to fetch Order",
+                error,
+            },
+            { status:500 }
      );
     }
 
@@ -63,34 +61,3 @@ export async function DELETE(request,{params:{id}}){
 
 }
 
-export async function PUT(request,{params:{id}}){
-    try {
-        const  { id, title, slug, categoryId, description, content, imageUrl, isActive } = await request.json();
-        
-        const exixtingTraining = await db.training.findUnique({
-            where:{
-                id,
-            },
-            
-        });
-        if(!exixtingTraining){
-            return NextResponse.json({
-                data:null,
-                message:`Training (${title}) no se encuentra`,
-            },{ status: 404}
-          );
-        }
-        const updatedTraining = await db.training.update({
-            where:{ id },
-            data: { title, slug, categoryId, description, content, imageUrl, isActive },
-        });
-        return  NextResponse.json(updatedTraining);
-    } catch (error) {
-        console.log(error);
-        return NextResponse.json({
-            message:"Failed to update Training",
-            error
-        },{status:500});
-    }
-
-}

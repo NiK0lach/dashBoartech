@@ -32,6 +32,7 @@ export default function OrderSummaryForm() {
         orderItems:cartItems,
         checkoutFormData,
       };
+      //console.log(data);
       try {
         setLoading(true);
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;

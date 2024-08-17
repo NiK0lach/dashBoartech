@@ -222,7 +222,7 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
           })
         }
         <div className='px-6 py-4'>
-        <button onClick={handleLogout} className='flex items-center space-x-3 px-6 py-3  rounded-md bg-lime-700'>
+        <button onClick={handleLogout} className='flex items-center space-x-3 px-6 py-3  rounded-md bg-lime-600 text-lime-50'>
           <LogOut/><span>Logout</span>
         </button>
         </div>

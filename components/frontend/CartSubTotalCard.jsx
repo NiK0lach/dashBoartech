@@ -16,7 +16,7 @@ export default function CartSubTotalCard({subTotal}) {
    style: 'currency',
    currency: 'COP', 
   }).format(totalPrice);
-console.log(formattedTotalPrice);
+///console.log(formattedTotalPrice);
  //console.log(subTotal);
  //console.log(tax); 
  //console.log(iva);

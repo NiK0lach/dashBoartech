@@ -28,12 +28,14 @@ import { useSession } from 'next-auth/react';
 
         const dispatch =useDispatch();
         async function processData(data) {
-            data.userId=userId;
-            //update thwe check oput data
-            dispatch(updateCheckoutFormData(data));
-            //update the current state
-            dispatch(setCurrentStep(currentStep + 1));
-           // console.log(data);
+            if(userId){
+              data.userId=userId;
+              //update thwe check oput data
+              dispatch(updateCheckoutFormData(data));
+              //update the current state
+              dispatch(setCurrentStep(currentStep + 1));
+            // console.log(data);
+            }
         }
 
  

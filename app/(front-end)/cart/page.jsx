@@ -15,7 +15,7 @@ export default function Cart() {
    }, 0).toFixed(2) ?? 0;
 
 
-  //console.log(cartItems);
+  console.log(cartItems);
   //console.log(subTotal);
 
     return(
