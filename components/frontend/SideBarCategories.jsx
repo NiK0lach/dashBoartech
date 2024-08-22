@@ -17,7 +17,7 @@ export default async function SideBarCategories() {
                 {
                     categories.map((category, i) => {
                         return(
-                            <Link key={i} href="#" className='flex items-center gap-2
+                            <Link key={i} href={`/category/${category.slug}`} className='flex items-center gap-2
                             hover:bg-slate-50 duration-500 transition-all dark:text-slate-300
                             rounded-md dark:hover:bg-slate-600'>
                             <Image

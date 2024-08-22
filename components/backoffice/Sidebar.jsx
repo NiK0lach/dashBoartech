@@ -104,25 +104,25 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
     ];
     if(role === "SUPPLIER"){
       sidebarLinks = [
-         {
-          title:"Comunity",
-          icon:PanelsTopLeft,
-          href:"/dashboard/community"
-        },
-        {
-          title:"Orders",
-          icon:Truck,
-          href:"/dashboard/orders"
-        },
         {
           title:"Sales",
           icon:Truck,
           href:"/dashboard/sales"
         },
+        {
+          title:"Stores",
+          icon:Warehouse,
+          href:"/dashboard/stores"
+        },
        {
           title:"Wallet",
           icon:CircleDollarSign,
           href:"/dashboard/wallet"
+        },
+        {
+          title:"Comunity",
+          icon:PanelsTopLeft,
+          href:"/dashboard/community"
         },
         {
           title:"Supplier Support",
@@ -139,6 +139,19 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
           icon:Store,
           href:"/"
         },
+      ];
+      catalogueLinks =[
+        {
+          title:"Products",
+          icon:GitCommitHorizontal,
+          href:"/dashboard/products"
+        },
+        {
+          title:"Coupons",
+          icon:GitCommitHorizontal,
+          href:"/dashboard/coupons"
+        },
+        
       ];
     }
     if(role === "USER"){

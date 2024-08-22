@@ -3,8 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request){
 
-
-    try {
+  try {
         const {
             slug,
             title,
@@ -21,9 +20,9 @@ export async function POST(request){
             qty,
             description, 
             tags,
-            imageUrl,    
             isActive,
             productCode,
+            productImages
         } = await request.json();
 
         const existingProduct= await db.product.findUnique({
@@ -55,7 +54,8 @@ export async function POST(request){
                 qty:parseInt(qty),
                 description, 
                 tags,
-                imageUrl,    
+                productImages,
+                imageUrl:productImages[0],    
                 isActive,
                 productCode },
         });

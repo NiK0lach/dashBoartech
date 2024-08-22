@@ -10,9 +10,16 @@ import { generateCouponCode } from '@/lib/generateCouponCode';
 import { useRouter } from 'next/navigation';
 import { redirect } from 'next/navigation';
 import { convertIsoDateToNormal } from '@/lib/convertIsoDateToNormal';
+import { useSession } from 'next-auth/react';
 
 
-export default function CouponForm({ updateData={} }) {
+export default function CouponForm({ updateData = {} }) {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  // if(status==="loading"){
+  //   return <p>loading...</p>
+  // }
+  const vendorId = session?.user?.id;
 
   const expiryDateNormal = convertIsoDateToNormal(updateData.expiryDate);  
   const id = updateData?.id ?? "";
@@ -35,7 +42,7 @@ export default function CouponForm({ updateData={} }) {
     },
   });
   const isActive = watch("isActive");
-  const router = useRouter();
+  
   function redirect(){
     router.push('/dashboard/coupons');
   }
@@ -43,26 +50,20 @@ export default function CouponForm({ updateData={} }) {
   
 
   async function onSubmit(data){
-      {/* 
-      -id=>auto
-      -title
-      -code=>auto
-      -expiry date
-      */}
-   //setLoading(true)
+   data.vendorId=vendorId;  
    const couponCode = generateCouponCode(data.title, data.expiryDate);
    const isoFormattedDate = generateisoFormattedDate(data.expiryDate);
    data.expiryDate= isoFormattedDate;
    data.couponCode = couponCode;
-   //console.log(data);
+   console.log(data);
    if (id) {
     //data.id = id;
     //make post ruquest update
-    makePutRequest(setLoading, `api/coupons/${id}`, data, "Coupons", redirect);
+    makePutRequest(setLoading, `api/coupons/${id}`, data, "Coupon", redirect);
     //console.log("update Request", data);
 } else {
     //make post request Create
-    makePostRequest(setLoading, "api/coupons", data, "Coupons", reset, redirect);
+    makePostRequest(setLoading, "api/coupons", data, "Coupon", reset, redirect);
     //expiryDate("");
     
 }

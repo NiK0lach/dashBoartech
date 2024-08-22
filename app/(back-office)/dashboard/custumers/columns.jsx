@@ -49,30 +49,25 @@ export const columns  = [
     {
       accessorKey: "role",
       header: "Role",
-    
     },
-    
-    
-    {
-      accessorKey: "isActive",
-      header: "Estado",
-    
-    },
+    // {
+    //   accessorKey: "isActive",
+    //   header: "Estado",
+    // },
     {
       accessorKey: "createdAt",
       header: "Date Created",
       cell: ({ row }) => <DateColumn row={row} accessorKey="createdAt" />,
-      
     },
     {
       id: "actions",
       cell: ({ row }) => {
-        const supplier = row.original;
+        const custumer = row.original;
         return <ActionColumn
         row={row}
-        title="supplier"
-        editEndpoint={`suppliers/update/${supplier.id}`}
-        endpoint={`suppliers/${supplier.id}`}
+        title="Custumer"
+        editEndpoint={`custumers/update/${custumer.id}`}
+        endpoint={`custumers/${custumer.id}`}
         />
       }
 

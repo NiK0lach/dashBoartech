@@ -2,6 +2,7 @@ import React from 'react'
 import { convertIsoDateToNormal } from '@/lib/convertIsoDateToNormal'
 import { generateSlug } from '@/lib/generateSlug';
 import Link from 'next/link';
+import Image from 'next/image';
 
 
 export default function OrderCart({order}) {

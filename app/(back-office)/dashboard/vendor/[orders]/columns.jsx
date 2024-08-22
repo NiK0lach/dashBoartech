@@ -2,7 +2,6 @@
 
 import { Checkbox } from "@/components/ui/checkbox";
 import DateColumn from "@/components/data-table-components/DataTableColumns/DateColumn";
-import ImageColumn from "@/components/data-table-components/DataTableColumns/ImageColumn";
 import SortableColumn from "@/components/data-table-components/DataTableColumns/SortableColumn";
 import ActionColumn from "@/components/data-table-components/DataTableColumns/ActionColumn";
 
@@ -31,48 +30,39 @@ export const columns  = [
     enableHiding: false,
   },
     {
-      accessorKey: "name",
+      accessorKey: "title",
       header: ({ column }) => (
-        <SortableColumn column={column} title="Name"/>
+        <SortableColumn column={column} title="title"/>
       )
     },
     {
-      accessorKey: "imageUrl",
-      header: "Suppliers Imagen",
-      cell: ({ row }) => (<ImageColumn row={row} accessorKey="imageUrl"/>)
+      accessorKey: "couponCode",
+      header: "Coupon Code",
     },
     {
-      accessorKey: "email",
-      header: "Email",
-    
+      accessorKey: "expiryDate",
+      header: "Expiry Date",
+      cell: ({ row }) => <DateColumn row={row} accessorKey="expiryDate" />,
     },
-    {
-      accessorKey: "role",
-      header: "Role",
-    
-    },
-    
     
     {
       accessorKey: "isActive",
       header: "Estado",
-    
     },
     {
       accessorKey: "createdAt",
       header: "Date Created",
       cell: ({ row }) => <DateColumn row={row} accessorKey="createdAt" />,
-      
     },
     {
       id: "actions",
       cell: ({ row }) => {
-        const supplier = row.original;
+        const coupon = row.original;
         return <ActionColumn
         row={row}
-        title="supplier"
-        editEndpoint={`suppliers/update/${supplier.id}`}
-        endpoint={`suppliers/${supplier.id}`}
+        title="coupon"
+        editEndpoint={`coupons/update/${coupon.id}`}
+        endpoint={`coupons/${coupon.id}`}
         />
       }
 

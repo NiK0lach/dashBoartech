@@ -17,6 +17,7 @@ export default async function page({ params: { id } }) {
         <div className="max-w-2xl mx-auto">
           <div className="relative mt-6 overflow-hidden bg-white dark:bg-slate-700 rounded-lg shadow md:mt-10">
             <div className="absolute top-4 right-4">
+            {/* href={`orders/${order.id}/invoice`} */}
               <button
                 type="button"
                 className="inline-flex items-center justify-center px-4 py-3 text-xs font-bold text-gray-900 transition-all duration-200 bg-gray-100 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 hover:bg-gray-200"

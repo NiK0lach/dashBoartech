@@ -76,7 +76,7 @@ export async function PUT(request, { params:{id}}){
         }
         const updatedCoupon = await db.coupon.update({
             where:{ id },
-            data: { title, couponCode, expiryDate, isActive},
+            data: { title, couponCode, expiryDate, isActive },
         });
         return  NextResponse.json(updatedCoupon);
     } catch (error) {

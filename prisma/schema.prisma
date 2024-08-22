@@ -21,8 +21,13 @@ model Coupon{
   expiryDate DateTime
   isActive Boolean
 
+  user   User @relation(fields: [vendorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  vendorId   String   @db.ObjectId
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+
 }
 
 model Banner{
@@ -39,7 +44,7 @@ model Banner{
 model Category {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   title      String 
-  slug       String @unique
+  slug       String  @unique
   imageUrl   String?
   description String?   
   isActive Boolean
@@ -88,19 +93,22 @@ model Product {
   isWholesale  Boolean
   saleTotalPrice Float
   wholsaQty Int
-  productStock Int
-  qty  Int
+  productStock Int?
+  qty  Int?
   description  String?
   tags      String[]
   imageUrl  String?
+  productImages String[]
   isActive  Boolean
   productCode String?
+  unit String?
 
-  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   categoryId String @db.ObjectId
+  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  
 
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId String  @unique 
+  userId String  @db.ObjectId
 
   orderItems    OrderItem[]
   sales         Sale[]
@@ -146,14 +154,15 @@ model User {
   emailVerified Boolean @default(false)
   password      String
  
-  products Product[]
+  products  Product[]
+  coupons   Coupon[]
 
   role          UserRole @default(USER)
   verificationToken  String?
-  profile            UserProfile?
+  profile            UserProfile? // Link to user profile
   supplierProfile    SupplierProfile?
   orders             Order[] //user can have multiple orders
-  sale               Sale[]  
+  sales              Sale[]  
 
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -162,10 +171,20 @@ model User {
 model UserProfile {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   userId    String   @unique @db.ObjectId
-  // Add other fields for user onboarding information
-  // For example:
-  dateOfBirth DateTime?
-  address    String?
+  
+ //Personal Details
+  name   String?
+  username    String?
+  email       String?
+  phone       String?
+  streetAddress  String?
+  city           String?
+  country        String?
+  dateOfBirth    DateTime?
+  profileImage   String?
+  zipCode        String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime? @updatedAt
   
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

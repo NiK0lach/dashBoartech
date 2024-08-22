@@ -6,34 +6,28 @@ import { columns } from './columns';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';
 
-export default async function coupons() {
+export default async function vendorOrders() {
   const session = await getServerSession(authOptions);
-  if(!session){
-    return null
-   }
-   const role = session?.user?.role;
-   const allCoupons = await getData('coupons');
-   const id = session?.user?.id;
-   console.log(id);
-   const supplierCoupons = allCoupons.filter((coupon) => coupon.vendorId === id);
+  const id = session?.user?.id;
+  const role = session?.user?.role;
+  const sales = await getData('sales');
+  const supplierSales = allSales.filter((sale)=>sale.vendorId===id);
   return (
     <div>
-      <PageHeader
-       heading="Coupons"
+      {/* <PageHeader
+       heading="Sales"
        href="/dashboard/coupons/new"
        linkTitle="Add Coupon"
-       />
+       /> */}
       
      
      <div className="py-8">
      {
-       role === "ADMIN" ? (<DataTable data={allCoupons} columns={columns} /> ) : (<DataTable data={supplierCoupons} columns={columns} />
-
-       )}  
-     
+       role === "ADMIN"?(<DataTable data={allSales} columns={columns} />):(<DataTable data={supplierSales} columns={columns} />)
+     }
      </div>
     </div>
-  );
+  )
 }
 
 

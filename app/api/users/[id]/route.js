@@ -7,6 +7,15 @@ export async function GET(request,{params:{id}}){
                 where:{
                     id,
                 },
+                
+                select:{
+                  profile:true,
+                  email:true,
+                  name:true,
+                  id:true,
+                  role:true,
+                  createdAt:true,  
+                },
             }
         );
         return NextResponse.json(user);

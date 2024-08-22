@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import DateColumn from "@/components/data-table-components/DataTableColumns/DateColumn";
 import ImageColumn from "@/components/data-table-components/DataTableColumns/ImageColumn";
 import SortableColumn from "@/components/data-table-components/DataTableColumns/SortableColumn";
-import ActionColumn from "@/components/data-table-components/DataTableColumns/ActionColumn";
+
 
 
 export const columns  = [
@@ -30,51 +30,42 @@ export const columns  = [
     enableSorting: false,
     enableHiding: false,
   },
+  {
+    accessorKey: "productImage",
+    header: "Product Imagen",
+    cell: ({ row }) => (<ImageColumn row={row} accessorKey="productImage"/>)
+  },
     {
-      accessorKey: "name",
+      accessorKey: "productTitle",
       header: ({ column }) => (
-        <SortableColumn column={column} title="Name"/>
+        <SortableColumn column={column} title="Product Title"/>
       )
     },
-    {
-      accessorKey: "imageUrl",
-      header: "Suppliers Imagen",
-      cell: ({ row }) => (<ImageColumn row={row} accessorKey="imageUrl"/>)
+     {
+        accessorKey: "description",
+        header: "Descr",
+        cell: ({ row }) => {
+          const description = row.getValue("description")
+          return <div  className="line-clamp-1">{description}</div>
+        },
     },
     {
-      accessorKey: "email",
-      header: "Email",
-    
+      accessorKey: "productPrice",
+      header: "Product Price",
     },
     {
-      accessorKey: "role",
-      header: "Role",
-    
+      accessorKey: "productQty",
+      header: "Qty",
     },
-    
-    
     {
-      accessorKey: "isActive",
-      header: "Estado",
-    
+      accessorKey: "total",
+      header: "Total",
     },
     {
       accessorKey: "createdAt",
       header: "Date Created",
       cell: ({ row }) => <DateColumn row={row} accessorKey="createdAt" />,
-      
     },
-    {
-      id: "actions",
-      cell: ({ row }) => {
-        const supplier = row.original;
-        return <ActionColumn
-        row={row}
-        title="supplier"
-        editEndpoint={`suppliers/update/${supplier.id}`}
-        endpoint={`suppliers/${supplier.id}`}
-        />
-      }
-
-    },
+    
+    
 ];

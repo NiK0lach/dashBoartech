@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import TexAreaInput from '@/components/FormInputs/FormInputs/TextAreaInput';
-import ImageInput from '@/components/FormInputs/FormInputs/ImageInput';
+
 import SelectInput from '@/components/FormInputs/FormInputs/SelectInput';
 import SubmitButton from '@/components/FormInputs/FormInputs/SubmitButton';
 import TextInput from '@/components/FormInputs/FormInputs/TextInput';
@@ -13,6 +13,7 @@ import ToggleInput from '@/components/FormInputs/FormInputs/ToggleInput';
 import { makePostRequest, makePutRequest } from '@/lib/apiRequest';
 import { useRouter } from 'next/navigation';
 import { redirect} from 'next/navigation';
+import MultipleImageInput from '@/components/FormInputs/FormInputs/MultipleImageInput';
 
 
 export default function ProductForm( {
@@ -49,13 +50,15 @@ export default function ProductForm( {
   function redirect(){
     router.push('/dashboard/products');
   }
-   
+
+  const [productImages,setproductImages]=useState([]);
+  console.log(productImages); 
 
   async function onSubmit(data){
       const slug=generateSlug(data.title);
       const productCode=generateUserCode('ELG',data.title)
           data.slug=slug;
-          data.imageUrl=imageUrl;
+          data.productImages=productImages;
           data.tags=tags;
           data.qty= 1;
           data.productCode=productCode;
@@ -64,13 +67,13 @@ export default function ProductForm( {
       if(id) {
         data.id = id;
         //make post ruquest update
-        makePutRequest(setLoading,`api/products/${id}`,data,"Products",redirect);
+       makePutRequest(setLoading,`api/products/${id}`,data,"Products",redirect);
         //console.log("update Request", data);
     } else {
         //make post request Create
-        makePostRequest(setLoading, "api/products", data, "Products", reset, redirect);
-        setImageUrl("");
-        setTags([]);
+      makePostRequest(setLoading, "api/products", data, "Products", reset, redirect);
+      setproductImages([]);
+      setTags([]);
     }
       
   }   
@@ -184,18 +187,12 @@ export default function ProductForm( {
             setItems={setTags} 
             items={tags} 
             itemTitle="Tag"/>
-            <ImageInput 
-            imageUrl={imageUrl} 
-            setImageUrl={setImageUrl} 
-            endpoint='productImageUploader' 
-            label="Product Image" 
-            />
-          <ToggleInput
-            label="Publica Producto"
-            name="isActive"
-            trueTitle="Active"
-            falseTitle="Draft"
-            register={register}
+            
+          <MultipleImageInput
+            label="Product images"
+            imageUrls={productImages}
+            setImageUrls={setproductImages}
+            endpoint='multipleImageUpload'
             />
            
         </div>

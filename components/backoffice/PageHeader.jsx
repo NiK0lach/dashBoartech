@@ -7,7 +7,9 @@ export default function PageHeader({ heading,linkTitle, href }) {
   return (
     <div className="flex justify-between py-4 mb-4">
         <Heading title={heading} />
-        <Link href={href} className='text-white bg-lime-600  hover:bg-lime-600/90 focus:ring-4 focus:outline-none  py-3 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-slate-600 /30 me-2 space-x-3'>
+        <Link href={href} className='text-white bg-lime-600  hover:bg-lime-600/90 focus:ring-4
+         focus:outline-none  py-3 px-3 text-center inline-flex items-center dark:focus:ring-gray-500
+          dark:hover:bg-slate-600 /30 me-2 space-x-3 rounded-md'>
         <Plus/>
         <span>{linkTitle}</span>
         </Link>

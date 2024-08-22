@@ -11,11 +11,12 @@ import { authOptions } from "@/lib/authOptions";
 export default async function Home() {
   const categoriesData = await getData('categories');
   const categories = await categoriesData.filter((category)=>{
-    return category.products.length > 3
+    return category.products.length > 2
   });
 
   const session = await getServerSession(authOptions);
-  console.log(session?.user);  //console.log(categories);
+  console.log(session?.user);  
+  console.log(categories);
   return (
    <div className="min-h-screen">
     <Hero/>
