@@ -17,7 +17,7 @@ export async function GET(request,{params:{slug}}){
         console.log(error);
         return NextResponse.json(
          {
-            message:"Failed to fetch category ",
+            message:"Failed to fetch Category ",
             error,
         },
         { status:500 }
