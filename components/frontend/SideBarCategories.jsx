@@ -4,17 +4,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default async function SideBarCategories() {
-    const categories = await getData('categories');
-    
+    const categoriesData = await getData('categories');
+    //Only categories with products
+    const categories = categoriesData.filter((category)=>category.products.length > 0);
+    //console.log(categories);
   return (
     <div className="col-span-3 hidden sm:block  bg-white border border-gray-300 dark:border-gray-700 rounded-lg
          dark:bg-gray-800 text-slate-800 overflow-hidden">
             <h2 className='bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-100
             py-3 px-6 font-semibold border-b-2 border-gray-300 dark:border-gray-300'>
-                Busca tu Categoria ({categories.length})
+                Shop By Category ({categories.length})
             </h2>
-            <div className='py-3 px-6 h-[300px] overflow-y-auto flex flex-col gap-3 mt-2'>
-                {
+            <div className='py-3 px-6 h-[300px] overflow-y-auto flex flex-col gap-3 mt-2 gap-2'>
+                {   categories.length > 0 && 
                     categories.map((category, i) => {
                         return(
                             <Link key={i} href={`/category/${category.slug}`} className='flex items-center gap-2
