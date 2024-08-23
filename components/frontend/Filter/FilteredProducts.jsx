@@ -1,8 +1,14 @@
+
 import React from 'react';
 import Product from '../Product';
 import Paginate from './Paginate';
 
-export default async function FilteredProducts({products=[]}) {
+export default async function FilteredProducts({products, productCount}) {
+  //PAGINATION
+  const pageSize = 3;
+  const totalPages = Math.ceil(productCount / pageSize);
+  //console.log("total pages",totalPages);
+  //console.log("productCount",productCount);
    
   return (
     <div className=''>
@@ -12,7 +18,7 @@ export default async function FilteredProducts({products=[]}) {
             })}
         </div>
         <div className="p-8 mx-auto flex items-center justify-center w-full">
-           <Paginate/>
+           <Paginate totalPages={totalPages}/>
         </div>
     </div>
   );

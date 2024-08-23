@@ -11,7 +11,8 @@ export default function PriceFilter({ slug }) {
     const searchParams = useSearchParams();
     const minParam = searchParams.get("min");
     const maxParam = searchParams.get("max");
-    console.log(minParam,maxParam);
+    //console.log(minParam,maxParam);
+    //console.log(slug);
     const priceRanges =[
         {
             display:"Under 200",
@@ -31,10 +32,10 @@ export default function PriceFilter({ slug }) {
      const router = useRouter();
      const {handleSubmit, reset, register } = useForm();
      function onSubmit(data){
-        const { min, max } = data;
+      const { min, max } = data;
         //min = parseInt(data.min);
         //max = parseInt(data.max);
-        console.log(min, max);
+        //console.log(min, max);
         if(min && max){
            router.push(`/category/${slug}?sort=asc&min=${min}&max=${max}`);
            reset(); 

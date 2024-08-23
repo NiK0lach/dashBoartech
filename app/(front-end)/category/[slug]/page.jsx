@@ -4,23 +4,11 @@ import { getData } from '@/lib/getData';
 
 
 export default async function page({params:{slug}, searchParams}) {
-  const {sort, min, max} = searchParams;
-  console.log(max);
+  const {sort = "asc", min = 0, max = "", page = 1} = searchParams;
   const category = await getData(`categories/filter/${slug}`);
-  let products;
-  if(max && min){
-    products = await getData(`products?catId=${category.id}&sort=asc&min=${min}&max=${max}`);
-  } else if(min){
-    products = await getData(`products?catId=${category.id}&sort=asc&min=${min}`);
-  }else if(max){
-    products = await getData(`products?catId=${category.id}&sort=asc&max=${max}`);
-  }else if (sort){
-    products = await getData(`products?catId=${category.id}&sort=${sort}`);
-  }else{
-    products = await getData(`products?catId=${category.id}`);
-  }
+  let products = await getData(
+    `products?catId=${category.id}&page=${page}&sort=${sort}&min=${min}&max=${max}`);
   
-  //const {products} = category;
   //console.log(products);
   return (
     <div>
