@@ -46,7 +46,7 @@ export default function StoreSlider({stores}) {
 
         { stores.map((store, i) => {
             return (
-                <Link key={i} href="#" alt="" className='rounded-lg mr-3'>
+                <Link key={i} href={`/store/${store.slug}`} alt="" className='rounded-lg mr-3'>
                 <Image
                 src={store.imageUrl}
                 alt={store.title}

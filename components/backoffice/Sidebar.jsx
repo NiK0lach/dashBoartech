@@ -110,20 +110,17 @@ export default function Sidebar({showSidebar,setShowSidebar}) {
           href:"/dashboard/sales"
         },
         {
-          title:"Stores",
-          icon:Warehouse,
-          href:"/dashboard/stores"
+          title:"My Orders",
+          icon:Truck,
+          href:"/dashboard/orders"
         },
+       
        {
           title:"Wallet",
           icon:CircleDollarSign,
           href:"/dashboard/wallet"
         },
-        {
-          title:"Comunity",
-          icon:PanelsTopLeft,
-          href:"/dashboard/community"
-        },
+        
         {
           title:"Supplier Support",
           icon:CircleDollarSign,

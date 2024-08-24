@@ -3,7 +3,7 @@ import Link from 'next/link';
 import CategoryCarousel from './CategoryCarousel';
 
 
-export default async function CategoryList({category}) {
+export default async function CategoryList({category, isStorePage}) {
  
   return (
     <div className='bg-white border border-gray-300 dark:border-gray-700 rounded-lg
@@ -12,10 +12,10 @@ export default async function CategoryList({category}) {
             py-3 px-6 font-semibold border-b-2 border-gray-300 dark:border-gray-300 flex justify-between items-center'>
             <h2>{category.title}</h2> 
             <Link className='bg-lime-900 hover:bg-lime-800 duration-300 transition-all text-slate-50 rounded-md px-4 py-2'
-             href="#" alt="">Ver mas</Link>
+             href={`/category/${category.slug}`} alt="">See All</Link>
         </div>
        <div className="bg-white dark:bg-slate-900 py-4">
-            <CategoryCarousel products={category.products}/>
+            <CategoryCarousel isStorePage={isStorePage} products={category.products}/>
        </div>
     </div>
   );

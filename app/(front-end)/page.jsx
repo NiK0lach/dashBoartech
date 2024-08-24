@@ -24,7 +24,7 @@ export default async function Home() {
       {categories.map((category, i) => {
        return(
           <div key={i} className="py-8">
-            <CategoryList category={category}/>
+            <CategoryList isStorePage={false} category={category}/>
           </div> 
           );
      })}

@@ -6,11 +6,16 @@ import { Minus, BaggageClaimIcon, Plus, Share2, TagIcon, Send } from 'lucide-rea
 import CategoryCarousel from '@/components/frontend/CategoryCarousel';
 import { getData } from '@/lib/getData';
 import Link from 'next/link';
+import AddToCartButton from '@/components/frontend/Filter/AddToCartButton';
 
 
 export default async function ProductDetailPage({params:{slug}}) {
     const product= await getData(`/products/product/${slug}`);
-    
+    const {id} = product;
+    const catId = product.categoryId;
+    const category = await getData(`categories/${catId}`);
+    const categoryProducts = category.products;
+    const products = categoryProducts.filter((product)=>product.id !== id);
   return (
     <div>
         <BreadCrumb/> 
@@ -52,19 +57,8 @@ export default async function ProductDetailPage({params:{slug}}) {
             </div>
 
             <div className='flex justify-between items-center py-6'>
-               <div className="flex gap-3 items-center rounded-xl border border-gray-400">
-                   <button className='px-4 py-2 hover:text-lime-400 transition-all duration-300 border-r border-gray-400'
-                   ><Minus/></button>
-                    <p className='flex-grow px-6 py-3'>1</p>
-                   <button className='px-6 py-3 hover:text-lime-400 transition-all duration-300 border-l border-gray-400'>
-                    <Plus/></button>
-                </div> 
-                <button className='flex items-center p-3 space-x-2 bg-lime-500
-                   dark:bg-lime-500 text-slate-100 dark:hover:text-slate-500
-                   text-sm rounded-lg  hover:bg-lime-800 duration-300 transition-all dark:hover:bg-lime-400 '>
-                   <BaggageClaimIcon className=''/>
-                   <span>Add to cart</span>
-                </button>   
+            <p>sometrhing here</p>
+               <AddToCartButton product={product}/>
             </div>    
         </div>
        <div className='col-span-3 sm:block  bg-white border border-gray-300 dark:border-gray-700 rounded-lg
@@ -129,9 +123,10 @@ export default async function ProductDetailPage({params:{slug}}) {
 
        <div className="bg-white border-b border-gray-200 dark:border-gray-700 dark:bg-slate-900
         py-3 h-96 px-8 rounded-lg mt-6">
-            <h2 className='text-xl font-semibold mb-4 py-6 px-5 bg-slate-50 dark:bg-slate-800 dark:border-gray-900 rounded-lg'>Related products</h2>
+            <h2 className='text-xl font-semibold mb-4 py-6 px-5 bg-slate-50 dark:bg-slate-800
+             dark:border-gray-900 rounded-lg'>Similar products</h2>
             <div className='scale-75 origin-top-left my-5 rounded-xl'>
-            
+               <CategoryCarousel products={products}/>
            </div>
        </div>
     </div>
