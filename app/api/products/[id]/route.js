@@ -62,7 +62,6 @@ export async function DELETE(request,{params:{id}}){
 export async function PUT(request,{params:{id}}){
     try {
         const  { 
-           
                 slug,
                 title,
                 sku, 

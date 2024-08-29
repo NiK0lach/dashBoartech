@@ -1,16 +1,39 @@
-import NewSupplierForm from '@/components/backoffice/NewSupplierForm';
-import { getData } from '@/lib/getData';
-import React from 'react'
+'use client';
+import React from "react";
 
-export default async function NewProduct({ params: {id} }) {
-    const user = await getData(`users/${id}`);
-    console.log(user);
+import StepForm from "@/components/Onboarding/StepForm";
+import Steps from "@/components/Onboarding/steps";
+
+export default function page({params:{id}}) {
+  const steps = [
+    {
+      number:1,
+      title:"Personal details",
+    },
+    {
+      number:2,
+      title:"Supplier Details",
+    },
+    {
+      number:3,
+      title:"Additional Information",
+    },
+    {
+      number:4,
+      title:"Summary",
+    },
+  ];
+
   return (
-    <div className='flex flex-col gap-6 p-16'>
-        <div className='max-w-4xl p-4 mx-auto'>
-        <h2>Hola {user?.name}, Cuentanos mas de ti?</h2>
-        </div>
-        <NewSupplierForm user={user}/>   
+    <div className="bg-white dark:bg-slate-900 min-h-screen">
+      <div className="max-w-3xl my-6 mx-auto border border-lime-300 dark:border-lime-700 p-6">
+        {/*Steps*/}
+        <Steps steps={steps}/>
+         <div className="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-700 dark:border-gray-700">
+           {/*form*/}
+           <StepForm supplierId={id}/>
+         </div>
+       </div>
     </div>
   );
 }

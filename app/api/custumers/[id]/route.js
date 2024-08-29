@@ -2,51 +2,29 @@ import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 
-export async function GET(request,{params:{id}}){
+export async function PUT(request,{params:{id}}){
     try {
-        const custumers = await db.user.findUnique({
-            where:{
-                id,
-              },
-            });
-         
-        return NextResponse.json(custumers);
-      
-    } catch (error) {
-        console.log(error);
-        return NextResponse.json(
-         {
-            message:"Failed to fetch user",
-            error,
-        },
-        { status:500 }
-     );
-    }
-
-}
-
-export async function PUT(request, { params:  {id} } ){
-    try {
-        const  {   
-            name,   
-            firstName,  
-            lastName,   
-            username,  
-            email,      
-            phone,      
-            streetAddress,
-            city,          
-            country,       
-            dateOfBirth,   
-            profileImage,  
-            zipCode} = await request.json();
+        const  {
+                userId,
+                name, 
+                firstName,
+                lastName,
+                username,
+                email,    
+                phone,   
+                dateOfBirth,
+                profileImage,
+                streetAddress,
+                city,        
+                country,
+                zipCode,
+              
+              } = await request.json();
 
        const exixtingUser = await db.user.findUnique({
-            where:{
-                id,
-            },
-        });
-        console.log(exixtingUser);
+            where:{id},
+          });
+        console.log("exixtingUser",exixtingUser);
         
         if(!exixtingUser){
             return NextResponse.json({
@@ -55,28 +33,33 @@ export async function PUT(request, { params:  {id} } ){
             },{ status: 404}
           );
         }
-        const updatedUser = await db.userprofile.update({
-            where:{ id },
-            data: { name,   
-                firstName,  
-                lastName,   
-                username,  
-                email,      
-                phone,      
+        const updateUser = await db.UserProfile.update({
+            where:{id},
+            
+            data:{
+                userId,
+                name, 
+                firstName,
+                lastName,
+                username,
+                email,    
+                phone,   
+                dateOfBirth,
+                profileImage,
                 streetAddress,
-                city,          
-                country,       
-                dateOfBirth,   
-                profileImage,  
-                zipCode},
+                city,        
+                country,
+                zipCode,
+               },
         });
-        return  NextResponse.json(updatedUser);
+        return  NextResponse.json(updateUser);
     } catch (error) {
         console.log(error);
         return NextResponse.json({
-            message:"Failed to update user",
+            message:"Failed to update UserProfile",
             error
         },{status:500});
     }
 
 }
+

@@ -20,7 +20,7 @@ export async function POST(request){
             userId
         } = await request.json();*/
         const supplierData = await request.json();
-        //console.log(supplierData);
+        console.log("this is supplierDAta",supplierData);
         //check if farmer exists in db
         const existingUser= await db.user.findUnique({
             where: {
@@ -45,11 +45,13 @@ export async function POST(request){
         });
         const newSupplierProfile = await db.SupplierProfile.create({
             data:{
-                name:supplierData.name,   
+                firstName:supplierData.firstName,
+                lastName:supplierData.lastName, 
+                   
                 phone: supplierData.phone,
                 profileImageUrl: supplierData.profileImageUrl,
-                email: supplierData.email,
-                adress: supplierData.adress,
+                
+                physicalAdress: supplierData.adress,
                 contact:supplierData.contact,
                 contactphone:supplierData.contactphone, 
                 paymenterms:supplierData.paymenterms,
