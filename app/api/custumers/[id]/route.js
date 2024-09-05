@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function PUT(request,{params:{id}}){
     try {
         const  {
-                userId,
+                userId:userId,
                 name, 
                 firstName,
                 lastName,
@@ -35,9 +35,67 @@ export async function PUT(request,{params:{id}}){
         }
         const updateUser = await db.UserProfile.update({
             where:{id},
-            
             data:{
-                userId,
+               name, 
+                firstName,
+                lastName,
+                username,
+                email,    
+                phone,   
+                dateOfBirth,
+                profileImage,
+                streetAddress,
+                city,        
+                country,
+                zipCode,
+                userId:userId,
+               },
+        });
+        return  NextResponse.json(updateUser);
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json({
+            message:"Failed to update UserProfile",
+            error
+        },{status:500});
+    }
+
+}
+
+export async function POST(request){
+    try {
+         const {
+            name, 
+            firstName,
+            lastName,
+            username,
+            email,    
+            phone,   
+            dateOfBirth,
+            profileImage,
+            streetAddress,
+            city,        
+            country,
+            zipCode,
+            userId:userId,
+        } = await request.json();
+        
+        const existingUser= await db.user.findUnique({
+            where: {
+                id:userId,
+            },
+          });
+        if(!existingUser){
+            return NextResponse.json({
+                data:null,
+                message:`Usuario no existe!`,
+            },{status:404}
+           );
+          }
+         
+       
+        const newCustumerProfile = await db.UserProfile.create({
+            data:{
                 name, 
                 firstName,
                 lastName,
@@ -50,15 +108,17 @@ export async function PUT(request,{params:{id}}){
                 city,        
                 country,
                 zipCode,
-               },
+                userId:userId,
+            },
         });
-        return  NextResponse.json(updateUser);
+        console.log(newCustumerProfile);
+        return  NextResponse.json(newCustumerProfile);
     } catch (error) {
         console.log(error);
         return NextResponse.json({
-            message:"Failed to update UserProfile",
+            message:"Failed to create Supplier",
             error
-        },{status:500});
+        },{status:500})
     }
 
 }

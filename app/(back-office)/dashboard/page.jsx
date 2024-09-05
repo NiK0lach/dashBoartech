@@ -7,11 +7,19 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';
 import UserDashBoard from '@/components/backoffice/UserDashBoard';
 import SupplierDashboard from '@/components/backoffice/SupplierDashboard';
+import { getData } from '@/lib/getData';
+
 
 
 export default async function page() {
   const session = await getServerSession(authOptions);
   const role = session?.user?.role;
+  const sales = await getData("sales");
+  //const salesById = sales.filter((sale)=> sale.vendorId === id);
+  const products = await getData("products");
+  const orders = await getData("orders");
+
+
   if(role==="USER"){
     return <UserDashBoard/>
   }
@@ -20,13 +28,13 @@ export default async function page() {
   }
   return (
     <div>
-      <Heading title="Dasboard Overview"/>
+      <Heading title="Dashboard Overview"/>
       {/*Large cards*/}
-      <LargeCards/>
+      <LargeCards sales={sales}/>
       {/*Small cards*/}
-      <SmallCards />
+      <SmallCards orders={orders} />
       {/*charts*/}
-      <DashboardCharts/>
+      <DashboardCharts sales={sales}/>
       {/*Recents order tables*/}
      {/* <CustumTable/>*/}
       

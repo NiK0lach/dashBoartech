@@ -31,7 +31,7 @@ export default async function page({ params: { slug } }) {
             src={store.logoUrl}
             width={50}
             height={50}
-            alt=""
+            alt={store.slug}
             className="w-16 h-16 rounded-full object-cover bg-slate-900 border-b border-slate-700 "
           />
         </div>

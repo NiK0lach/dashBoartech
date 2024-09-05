@@ -6,11 +6,13 @@ import TextInput from '@/components/FormInputs/FormInputs/TextInput';
 import ImageInput from '@/components/FormInputs/FormInputs/ImageInput';
 import { generateisoFormattedDate } from '@/lib/generateisoFormattedDate';
 import { redirect, useRouter } from 'next/navigation';
-import {  makePutRequest } from '@/lib/apiRequest';
+import {  makePostRequest, makePutRequest } from '@/lib/apiRequest';
 
 
-export default function CustumerForm( { user } ) {
+export default  function CustumerForm( { user } ) {
+function getProfileDta(){
 
+}
   //console.log("customerfORM usER LANDED",user);
    const [loading,setLoading] =useState(false);
    const [imageUrl,setImageUrl] =useState("");
@@ -43,6 +45,20 @@ export default function CustumerForm( { user } ) {
      console.log("to send Data on profile", data);
     
      makePutRequest(setLoading,`api/custumers/${user.id}`, data,"Custumer Profile",redirect,reset);
+    
+    /*  if(data.userId=user.id) {
+      
+      makePostRequest(setLoading, `api/custumers/${user.id}`, data, "Custumer Profile", reset, redirect);
+    
+      //make post ruquest update
+    
+      //console.log("update Request", data);
+  } else {
+      //make post request Create
+      makePutRequest(setLoading,`api/custumers/${user.id}`,data,"Custumer Profile",redirect);
+    
+  } */
+  
  }
 
 

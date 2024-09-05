@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 export default function Steps({ steps }) {
   const currentStep=useSelector((store)=>store.onboarding.currentStep);
- console.log(currentStep);
+ //console.log(currentStep);
 return (
      <nav className="flex text-sm md:text-xl mb-8">
           <ol role="list" className="flex flex-wrap gap-y-5 md:gap-y-0 items-center gap-x-1.5">

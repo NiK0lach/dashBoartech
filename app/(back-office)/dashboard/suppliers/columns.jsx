@@ -5,6 +5,7 @@ import DateColumn from "@/components/data-table-components/DataTableColumns/Date
 import ImageColumn from "@/components/data-table-components/DataTableColumns/ImageColumn";
 import SortableColumn from "@/components/data-table-components/DataTableColumns/SortableColumn";
 import ActionColumn from "@/components/data-table-components/DataTableColumns/ActionColumn";
+import Status from "@/components/data-table-components/DataTableColumns/Status";
 
 
 export const columns  = [
@@ -51,12 +52,10 @@ export const columns  = [
       header: "Role",
     
     },
-    
-    
     {
-      accessorKey: "isActive",
-      header: "Estado",
-    
+      accessorKey: "status",
+      header: "Status",
+      cell: ({ row }) => <Status row={row} accessorKey="status" />,
     },
     {
       accessorKey: "createdAt",

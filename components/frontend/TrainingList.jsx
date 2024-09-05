@@ -2,24 +2,40 @@ import React from 'react'
 import Link from 'next/link'
 import TrainingCarousel from './TrainingCarousel'
 import { getData } from '@/lib/getData'
+import BlogCard from './BlogCard';
+import { MoveRight } from 'lucide-react';
 
 
-export default async function TrainingList() {
-  const training = await getData('training');
+export default async function TrainingList({training, title}) {
+  
   return (
-    <div className='bg-white border border-gray-300 dark:border-gray-700 rounded-lg
-         dark:bg-gray-800 text-slate-800 overflow-hidden mt-6'>
-       <div className='bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-100
-            py-3 px-6 font-semibold border-b-2 border-gray-300 dark:border-gray-300 flex justify-between items-center'>
-            <h2 className='text-center dark:text-slate-100 text-slate-800 my-2 text-xl'>Gernik communidad</h2> 
-            <Link className='bg-lime-900 hover:bg-lime-800 duration-300 transition-all
-             text-slate-50 rounded-md px-4 py-2'
-             href="#" alt="">Ver mas</Link>
+    <section className="py-12 bg-white dark:bg-slate-800 rounded-md dark:text-slate-100 shadow-lg sm:py-14 lg:py-16">
+      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+        <div className=" mx-auto md:mx-0">
+          <div className="flex items-center justify-between">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 sm:text-4xl">
+            {title}
+          </h2>
+          <Link href="/blogs" className='bg-slate-500 py-3 px-5 rounded flex items-center'>See All <MoveRight className='flex-shrink-0 mx-2'/></Link>
+          </div>
+          <p className="mt-5 text-base font-normal leading-7 text-gray-500 dark:text-slate-300">
+            Create custom landing pages with Rareblocks that converts more visitors than any website.
+          </p>
         </div>
-       <div className="bg-white dark:bg-slate-900 py-4">
-           <TrainingCarousel training={training}/>
-       </div>
-    </div>
-  )
+
+        <div
+          className="grid max-w-md grid-cols-1 mx-auto mt-12 sm:mt-16 md:grid-cols-3 gap-y-12 md:gap-x-8 lg:gap-x-16 md:max-w-none">
+          
+          {
+            training.map((training,i)=>{
+              return <BlogCard key={i} training={training} />
+            })
+          }
+
+          
+        </div>
+      </div>
+    </section>
+  );
 }
 

@@ -49,6 +49,7 @@ export async function GET(request){
                     createdAt:"desc",
                 },
                
+               
             });
         return NextResponse.json(trainings);
       

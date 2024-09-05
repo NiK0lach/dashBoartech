@@ -13,10 +13,11 @@ export default async function Home() {
   const categories = await categoriesData.filter((category)=>{
     return category.products.length > 2
   });
-
+  const training = await getData("training");
+  
   const session = await getServerSession(authOptions);
-  console.log(session?.user);  
-  console.log(categories);
+  //console.log(session?.user);  
+  //console.log(categories);
   return (
    <div className="min-h-screen">
     <Hero/>
@@ -29,9 +30,8 @@ export default async function Home() {
           );
      })}
 
-    <TrainingList/>
-    <h2 className="text-4xl px-8 mt-8">Front end Webapp Gernik</h2>
-    <Link className="my-4 underline px-8" href="/register-supplier">Registrate como Contratista</Link> 
+    <TrainingList title="Featured trainings" training={training.slice(0,3)}/>
+    
    </div>
   );
 }

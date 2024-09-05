@@ -62,3 +62,34 @@ export async function DELETE(request,{params:{id}}){
     }
 
 }
+
+export async function PUT(request,{params:{id}}){
+    try {
+        const  { status,emailVerified } = await request.json();
+        
+        const exixtingSupplier=await db.user.findUnique({
+            where:{
+                id,
+            },
+        });
+        if(!exixtingSupplier){
+            return NextResponse.json({
+                data:null,
+                message:`Not Found`,
+            },{ status: 404}
+          );
+        }
+        const updatedSupplier = await db.user.update({
+            where:{ id },
+            data: { status, emailVerified  },
+        });
+        return  NextResponse.json(updatedSupplier);
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json({
+            message:"Failed to update Supplier",
+            error
+        },{status:500});
+    }
+
+}

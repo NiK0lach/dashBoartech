@@ -7,6 +7,8 @@ import CategoryCarousel from '@/components/frontend/CategoryCarousel';
 import { getData } from '@/lib/getData';
 import Link from 'next/link';
 import AddToCartButton from '@/components/frontend/Filter/AddToCartButton';
+import ProductShareButton from '@/components/frontend/ProductShareButton';
+import ProductImageCarrousel from '@/components/frontend/ProductImageCarrousel';
 
 
 export default async function ProductDetailPage({params:{slug}}) {
@@ -16,22 +18,20 @@ export default async function ProductDetailPage({params:{slug}}) {
     const category = await getData(`categories/${catId}`);
     const categoryProducts = category.products;
     const products = categoryProducts.filter((product)=>product.id !== id);
+    const baseUrl =process.env.NEXT_PUBLIC_BASE_URL;
+    const urlToShare =`${baseUrl}/products/${slug}`;
   return (
     <div>
         <BreadCrumb/> 
        <div className="grid grid-cols-12 gap-8">
           <div className='col-span-3'>
-           <Image src={product.imageUrl}
-            alt={product.title}
-            width={500}
-            height={600}
-            className='w-full object-cover' />
+           <ProductImageCarrousel productImages={product.productImages} thumbnail={product.imageUrl}/>
         </div>
         <div className='col-span-6'>
             <div className='flex items-center justify-between'>
                 <h2 className='text-xl lg:text-3xl font-semibold'>{product.title}</h2>
                 <button>
-                    <Share2/>
+                    <ProductShareButton urlToShare={urlToShare}/>
                 </button>
             </div>
             
@@ -57,7 +57,7 @@ export default async function ProductDetailPage({params:{slug}}) {
             </div>
 
             <div className='flex justify-between items-center py-6'>
-            <p>sometrhing here</p>
+            <p>Something here</p>
                <AddToCartButton product={product}/>
             </div>    
         </div>
